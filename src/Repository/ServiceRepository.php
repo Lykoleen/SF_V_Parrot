@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\Schedules;
+use App\Entity\Service;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Schedules>
+ * @extends ServiceEntityRepository<Service>
  *
- * @method Schedules|null find($id, $lockMode = null, $lockVersion = null)
- * @method Schedules|null findOneBy(array $criteria, array $orderBy = null)
- * @method Schedules[]    findAll()
- * @method Schedules[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Service|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Service|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Service[]    findAll()
+ * @method Service[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SchedulesRepository extends ServiceEntityRepository
+class ServiceRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Schedules::class);
+        parent::__construct($registry, Service::class);
     }
 
 //    /**
-//     * @return Schedules[] Returns an array of Schedules objects
+//     * @return Service[] Returns an array of Service objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class SchedulesRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Schedules
+//    public function findOneBySomeField($value): ?Service
 //    {
 //        return $this->createQueryBuilder('s')
 //            ->andWhere('s.exampleField = :val')

@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\SchedulesRepository;
+use App\Repository\ScheduleRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: SchedulesRepository::class)]
-class Schedules
+#[ORM\Entity(repositoryClass: ScheduleRepository::class)]
+class Schedule
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
