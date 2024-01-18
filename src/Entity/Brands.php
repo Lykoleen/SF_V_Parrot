@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\RoleRepository;
+use App\Repository\BrandsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: RoleRepository::class)]
-class Role
+#[ORM\Entity(repositoryClass: BrandsRepository::class)]
+class Brands
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -14,21 +14,21 @@ class Role
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $role = null;
+    private ?string $name = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getRole(): ?string
+    public function getName(): ?string
     {
-        return $this->role;
+        return $this->name;
     }
 
-    public function setRole(string $role): static
+    public function setName(string $name): static
     {
-        $this->role = $role;
+        $this->name = $name;
 
         return $this;
     }

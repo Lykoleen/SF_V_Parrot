@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\GearboxRepository;
+use App\Repository\RolesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: GearboxRepository::class)]
-class Gearbox
+#[ORM\Entity(repositoryClass: RolesRepository::class)]
+class Roles
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -14,21 +14,21 @@ class Gearbox
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private ?string $Roles = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getRoles(): ?string
     {
-        return $this->name;
+        return $this->Roles;
     }
 
-    public function setName(string $name): static
+    public function setRoles(string $Roles): static
     {
-        $this->name = $name;
+        $this->Roles = $Roles;
 
         return $this;
     }

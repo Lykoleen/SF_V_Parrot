@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\GarageRepository;
+use App\Repository\GaragesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: GarageRepository::class)]
-class Garage
+#[ORM\Entity(repositoryClass: GaragesRepository::class)]
+class Garages
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
