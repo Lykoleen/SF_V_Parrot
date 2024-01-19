@@ -2,11 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\RoleRepository;
+use App\Repository\RolesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: RoleRepository::class)]
-class Role
+#[ORM\Entity(repositoryClass: RolesRepository::class)]
+class Roles
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -21,7 +21,7 @@ class Role
         return $this->id;
     }
 
-    public function getRole(): ?string
+    public function getRoles(): ?string
     {
         return $this->Role;
     }

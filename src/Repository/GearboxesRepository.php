@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\Gearbox;
+use App\Entity\Gearboxes;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Gearbox>
+ * @extends ServiceEntityRepository<Gearboxes>
  *
- * @method Gearbox|null find($id, $lockMode = null, $lockVersion = null)
- * @method Gearbox|null findOneBy(array $criteria, array $orderBy = null)
- * @method Gearbox[]    findAll()
- * @method Gearbox[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Gearboxes|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Gearboxes|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Gearboxes[]    findAll()
+ * @method Gearboxes[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class GearboxRepository extends ServiceEntityRepository
+class GearboxesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Gearbox::class);
+        parent::__construct($registry, Gearboxes::class);
     }
 
 //    /**
-//     * @return Gearbox[] Returns an array of Gearbox objects
+//     * @return Gearboxes[] Returns an array of Gearboxes objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class GearboxRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Gearbox
+//    public function findOneBySomeField($value): ?Gearboxes
 //    {
 //        return $this->createQueryBuilder('g')
 //            ->andWhere('g.exampleField = :val')
