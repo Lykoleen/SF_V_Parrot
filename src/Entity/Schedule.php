@@ -29,6 +29,10 @@ class Schedule
     #[ORM\Column(nullable: true)]
     private ?bool $close = null;
 
+    #[ORM\ManyToOne(inversedBy: 'schedules')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Garage $garage = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +94,18 @@ class Schedule
     public function setClose(?bool $close): static
     {
         $this->close = $close;
+
+        return $this;
+    }
+
+    public function getGarage(): ?Garage
+    {
+        return $this->garage;
+    }
+
+    public function setGarage(?Garage $garage): static
+    {
+        $this->garage = $garage;
 
         return $this;
     }

@@ -19,6 +19,13 @@ class Picture
     #[ORM\Column(length: 255)]
     private ?string $path = null;
 
+    #[ORM\ManyToOne(inversedBy: 'pictures')]
+    private ?Service $services = null;
+
+    #[ORM\ManyToOne(inversedBy: 'pictures')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Vehicle $vehicles = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -44,6 +51,30 @@ class Picture
     public function setPath(string $path): static
     {
         $this->path = $path;
+
+        return $this;
+    }
+
+    public function getServices(): ?Service
+    {
+        return $this->services;
+    }
+
+    public function setServices(?Service $services): static
+    {
+        $this->services = $services;
+
+        return $this;
+    }
+
+    public function getVehicles(): ?Vehicle
+    {
+        return $this->vehicles;
+    }
+
+    public function setVehicles(?Vehicle $vehicles): static
+    {
+        $this->vehicles = $vehicles;
 
         return $this;
     }

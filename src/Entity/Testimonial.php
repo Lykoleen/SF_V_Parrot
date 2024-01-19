@@ -29,6 +29,10 @@ class Testimonial
     #[ORM\Column(nullable: true)]
     private ?bool $is_actif = null;
 
+    #[ORM\ManyToOne(inversedBy: 'testimonials')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Garage $garage = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +94,18 @@ class Testimonial
     public function setIsActif(?bool $is_actif): static
     {
         $this->is_actif = $is_actif;
+
+        return $this;
+    }
+
+    public function getGarage(): ?Garage
+    {
+        return $this->garage;
+    }
+
+    public function setGarage(?Garage $garage): static
+    {
+        $this->garage = $garage;
 
         return $this;
     }
