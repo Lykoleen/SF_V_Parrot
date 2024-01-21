@@ -6,33 +6,52 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Mime\Message;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity('email', message:"Cette adresse e-mail est déjà utilisée.")]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type:"int")]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180, unique: true)]
+    #[ORM\Column(name:"email", type:"string", length: 180, unique: true)]
+    #[Assert\NotBlank(message:"Vous devez saisir une adresse e-mail")]
+    #[Assert\Regex(
+        pattern:"/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+    ",
+    message:"L'adresse e-mail n'est pas valide.")]
     private ?string $email = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type:"array")]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
-    #[ORM\Column]
+    #[ORM\Column(type:"string")]
+    #[Assert\NotBlank("Vous devez saisir un mot de passe avec au minimum 12 caractères contenant au moins des minuscules, majuscules, chiffres et caractères spéciaux (@, $, !, %, *, ?, &)")]
+    #[Assert\Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$
+    ", message:"Vous devez saisir un mot de passe avec au minimum 12 caractères contenant au moins des minuscules, majuscules, chiffres et caractères spéciaux (@, $, !, %, *, ?, &)")]
+    #[Assert\EqualTo(propertyPath:"confirmPassword", message:"Les mots de passe ne sont pas identiques")]
     private ?string $password = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type:"string")]
+    #[Assert\NotBlank("Vous devez confirmer votre mot de passe.")]
+    private ?string $confirmPassword = null;
+
+    #[ORM\Column(type:"string", length: 255)]
+    #[Assert\NotBlank("Vous devez renseigner votre prénom.")]
     private ?string $firstname = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type:"string", length: 255)]
+    #[Assert\NotBlank("Vous devez renseigner votre nom.")]
     private ?string $lastname = null;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
@@ -176,6 +195,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->garages->removeElement($garage)) {
             $garage->removeUser($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the value of confirmPassword
+     */ 
+    public function getConfirmPassword(): string
+    {
+        return $this->confirmPassword;
+    }
+
+    /**
+     * Set the value of confirmPassword
+     *
+     * @return  self
+     */ 
+    public function setConfirmPassword(string $confirmPassword): static
+    {
+        $this->confirmPassword = $confirmPassword;
 
         return $this;
     }

@@ -6,25 +6,36 @@ use App\Repository\GarageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: GarageRepository::class)]
+#[UniqueEntity('email', message:"Cette adresse email est déjà utilisée.")]
 class Garage
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type:"int")]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type:"string", length: 255)]
+    #[Assert\NotBlank("Vous devez renseigner le nom du garage.")]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $mail = null;
+    #[ORM\Column(type:"string", length: 255)]
+    #[Assert\NotBlank("Vous devez renseigner l'email du garage.")]
+    #[Assert\Regex(
+        pattern:"/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+    ",
+    message:"L'adresse e-mail n'est pas valide.")]
+    private ?string $email = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type:"string", length: 255)]
+    #[Assert\NotBlank("Vous devez renseigner l'adresse' du garage.")]
     private ?string $adress = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(type:"int", nullable: true)]
+    #[Assert\NotBlank("Vous devez renseigner le numéro de téléphone du garage.")]
     private ?int $tel = null;
 
     #[ORM\OneToMany(mappedBy: 'garage', targetEntity: testimonial::class, orphanRemoval: true)]
@@ -68,14 +79,14 @@ class Garage
         return $this;
     }
 
-    public function getMail(): ?string
+    public function getemail(): ?string
     {
-        return $this->mail;
+        return $this->email;
     }
 
-    public function setMail(string $mail): static
+    public function setemail(string $email): static
     {
-        $this->mail = $mail;
+        $this->email = $email;
 
         return $this;
     }

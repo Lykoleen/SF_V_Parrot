@@ -6,16 +6,18 @@ use App\Repository\GearboxRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: GearboxRepository::class)]
 class Gearbox
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type:"int")]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type:"string", length: 255)]
+    #[Assert\NotBlank("Vous devez renseigner le type de la boîte de vitesse.")]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'gearboxes', targetEntity: Vehicle::class)]
