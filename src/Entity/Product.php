@@ -13,24 +13,24 @@ class Product
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type:"int")]
-    private ?int $id = null;
+    #[ORM\Column]
+    private int $id;
 
     #[ORM\Column(type:"string", length: 255, unique: true)]
     #[Assert\NotBlank("Veuillez renseigner le nom du produit.")]
-    private ?string $title = null;
+    private string $title;
 
-    #[ORM\Column(type:"int")]
+    #[ORM\Column(type:"integer")]
     #[Assert\NotBlank("Veuiller renseigner le prix du produit.")]
     #[Assert\PositiveOrZero("Le prix doit être supérieur ou égal à 0")]
-    private ?float $price = null;
+    private float $price;
 
-    #[ORM\Column(type:"int")]
+    #[ORM\Column(type:"integer")]
     #[Assert\NotBlank("Veuiller renseigner la quantité du produit.")]
     #[Assert\PositiveOrZero("La quantité doit être supérieure ou égale à 0")]
-    private ?int $quantity = null;
+    private int $quantity;
 
-    #[ORM\Column(type:"bool", nullable: true)]
+    #[ORM\Column(nullable: true)]
     private ?bool $availability = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]

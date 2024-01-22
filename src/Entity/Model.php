@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\BrandRepository;
+use App\Repository\ModelRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: BrandRepository::class)]
-class Brand
+#[ORM\Entity(repositoryClass: ModelRepository::class)]
+#[UniqueEntity('name', message:"Ce modèle de véhicule est déjà enregistré.")]
+class Model
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,10 +19,10 @@ class Brand
     private int $id;
 
     #[ORM\Column(type:"string", length: 255)]
-    #[Assert\NotBlank("Vous devez renseigner le nom de la marque.")]
+    #[Assert\NotBlank("Vous devez renseigner le modèle du véhicule.")]
     private string $name;
 
-    #[ORM\OneToMany(mappedBy: 'brands', targetEntity: Vehicle::class)]
+    #[ORM\OneToMany(mappedBy: 'models', targetEntity: Vehicle::class)]
     private Collection $vehicles;
 
     public function __construct()
@@ -57,7 +59,7 @@ class Brand
     {
         if (!$this->vehicles->contains($vehicle)) {
             $this->vehicles->add($vehicle);
-            $vehicle->setBrands($this);
+            $vehicle->setModels($this);
         }
 
         return $this;
@@ -67,8 +69,8 @@ class Brand
     {
         if ($this->vehicles->removeElement($vehicle)) {
             // set the owning side to null (unless already changed)
-            if ($vehicle->getBrands() === $this) {
-                $vehicle->setBrands(null);
+            if ($vehicle->getModels() === $this) {
+                $vehicle->setModels(null);
             }
         }
 

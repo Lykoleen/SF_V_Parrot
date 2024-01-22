@@ -4,21 +4,25 @@ namespace App\Entity;
 
 use App\Repository\PictureRepository;
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: PictureRepository::class)]
+#[UniqueEntity('name')]
 class Picture
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type:"int")]
-    private ?int $id = null;
+    #[ORM\Column]
+    private int $id;
 
     #[ORM\Column(type:"string", length: 255)]
-    private ?string $name = null;
+    private string $name;
 
-    #[ORM\Column(length: 255)]
-    private ?string $path = null;
+    #[ORM\Column(type:"string", length: 255)]
+    #[Assert\Regex("^\/?([a-zA-Z0-9_\-]+\/)*[a-zA-Z0-9_\-]+\.[a-zA-Z0-9]+$
+    ")]
+    private string $path;
 
     #[ORM\ManyToOne(inversedBy: 'pictures')]
     private ?Service $services = null;

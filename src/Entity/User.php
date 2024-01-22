@@ -6,7 +6,6 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Mime\Message;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,8 +17,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type:"int")]
-    private ?int $id = null;
+    #[ORM\Column]
+    private int $id;
 
     #[ORM\Column(name:"email", type:"string", length: 180, unique: true)]
     #[Assert\NotBlank(message:"Vous devez saisir une adresse e-mail")]
@@ -27,10 +26,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         pattern:"/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
     ",
     message:"L'adresse e-mail n'est pas valide.")]
-    private ?string $email = null;
-
-    #[ORM\Column(type:"array")]
-    private array $roles = [];
+    private string $email;
 
     /**
      * @var string The hashed password
@@ -40,23 +36,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$
     ", message:"Vous devez saisir un mot de passe avec au minimum 12 caractères contenant au moins des minuscules, majuscules, chiffres et caractères spéciaux (@, $, !, %, *, ?, &)")]
     #[Assert\EqualTo(propertyPath:"confirmPassword", message:"Les mots de passe ne sont pas identiques")]
-    private ?string $password = null;
+    private string $password;
 
     #[ORM\Column(type:"string")]
     #[Assert\NotBlank("Vous devez confirmer votre mot de passe.")]
-    private ?string $confirmPassword = null;
+    private string $confirmPassword;
 
     #[ORM\Column(type:"string", length: 255)]
     #[Assert\NotBlank("Vous devez renseigner votre prénom.")]
-    private ?string $firstname = null;
+    private string $firstname;
 
     #[ORM\Column(type:"string", length: 255)]
     #[Assert\NotBlank("Vous devez renseigner votre nom.")]
-    private ?string $lastname = null;
+    private string $lastname;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?role $role = null;
+    #[ORM\Column(type: 'json')]
+    private array $roles = [];
 
     #[ORM\ManyToMany(targetEntity: Garage::class, mappedBy: 'users')]
     private Collection $garages;
@@ -93,7 +88,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return (string) $this->email;
     }
 
-    /**
+/**
      * @see UserInterface
      */
     public function getRoles(): array
@@ -105,7 +100,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return array_unique($roles);
     }
 
-    public function setRoles(array $roles): static
+    public function setRoles(array $roles): self
     {
         $this->roles = $roles;
 
@@ -156,18 +151,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastname(string $lastname): static
     {
         $this->lastname = $lastname;
-
-        return $this;
-    }
-
-    public function getRole(): ?role
-    {
-        return $this->role;
-    }
-
-    public function setRole(?role $role): static
-    {
-        $this->role = $role;
 
         return $this;
     }

@@ -12,13 +12,13 @@ class Schedule
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $day = null;
+    #[ORM\Column(type:"string", length: 255)]
+    private string $day;
 
-    #[ORM\Column(length: 255)]
-    private ?string $slot = null;
+    #[ORM\Column(type:"string", length: 255)]
+    private string $slot;
 
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $opening = null;

@@ -7,20 +7,25 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: ServiceRepository::class)]
+#[UniqueEntity('title', message:"Vous avez déjà proposé ce service.")]
 class Service
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $title = null;
+    #[ORM\Column(type:"string", length: 255)]
+    #[Assert\NotBlank("Vous devez renseigner le nom du service.")]
+    private string $title;
 
     #[ORM\Column(type: Types::TEXT, length: 20000)]
-    private ?string $description = null;
+    #[Assert\NotBlank("Vous devez renseigner la description du service.")]
+    private string $description;
 
     #[ORM\OneToMany(mappedBy: 'services', targetEntity: Picture::class)]
     private Collection $pictures;

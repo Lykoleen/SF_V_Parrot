@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VehicleRepository::class)]
 class Vehicle
@@ -14,19 +15,26 @@ class Vehicle
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $model = null;
+    #[ORM\Column(type:"string", length: 255)]
+    #[Assert\NotBlank("Vous devez renseigner le titre de l'annonce.")]
+    private string $title;
 
-    #[ORM\Column]
-    private ?int $years = null;
+    #[ORM\Column(type:"integer")]
+    #[Assert\NotBlank("Vous devez renseigner l'année du véhicule'.")]
+    #[Assert\Positive]
+    #[Assert\Range(min: 1000, max: 10000, minMessage:"Erreur, l'année renseignée est trop basse.", maxMessage:"Erreur, l'année renseignée est trop élevée.")]
+    private int $years;
 
-    #[ORM\Column]
-    private ?int $mileage = null;
+    #[ORM\Column(type:"integer")]
+    #[Assert\NotBlank("Vous devez renseigner le kilométrage du véhicule'.")]
+    #[Assert\PositiveOrZero]
+    private int $mileage;
 
     #[ORM\Column(type: Types::TEXT, length: 20000)]
-    private ?string $description = null;
+    #[Assert\NotBlank("Vous devez renseigner une description pour le véhicule.")]
+    private string $description;
 
     #[ORM\OneToMany(mappedBy: 'vehicles', targetEntity: Picture::class, orphanRemoval: true)]
     private Collection $pictures;
@@ -36,6 +44,14 @@ class Vehicle
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     private ?Brand $brands = null;
+
+    #[ORM\ManyToOne(inversedBy: 'vehicles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?energy $energies = null;
+
+    #[ORM\ManyToOne(inversedBy: 'vehicles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?model $models = null;
 
     public function __construct()
     {
@@ -47,14 +63,14 @@ class Vehicle
         return $this->id;
     }
 
-    public function getModel(): ?string
+    public function gettitle(): ?string
     {
-        return $this->model;
+        return $this->title;
     }
 
-    public function setModel(string $model): static
+    public function settitle(string $title): static
     {
-        $this->model = $model;
+        $this->title = $title;
 
         return $this;
     }
@@ -145,6 +161,30 @@ class Vehicle
     public function setBrands(?Brand $brands): static
     {
         $this->brands = $brands;
+
+        return $this;
+    }
+
+    public function getEnergies(): ?energy
+    {
+        return $this->energies;
+    }
+
+    public function setEnergies(?energy $energies): static
+    {
+        $this->energies = $energies;
+
+        return $this;
+    }
+
+    public function getModels(): ?model
+    {
+        return $this->models;
+    }
+
+    public function setModels(?model $models): static
+    {
+        $this->models = $models;
 
         return $this;
     }

@@ -15,12 +15,12 @@ class Garage
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type:"int")]
-    private ?int $id = null;
+    #[ORM\Column]
+    private int $id;
 
     #[ORM\Column(type:"string", length: 255)]
     #[Assert\NotBlank("Vous devez renseigner le nom du garage.")]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\Column(type:"string", length: 255)]
     #[Assert\NotBlank("Vous devez renseigner l'email du garage.")]
@@ -28,15 +28,15 @@ class Garage
         pattern:"/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
     ",
     message:"L'adresse e-mail n'est pas valide.")]
-    private ?string $email = null;
+    private string $email;
 
     #[ORM\Column(type:"string", length: 255)]
     #[Assert\NotBlank("Vous devez renseigner l'adresse' du garage.")]
-    private ?string $adress = null;
+    private string $adress;
 
-    #[ORM\Column(type:"int", nullable: true)]
+    #[ORM\Column(type:"integer", nullable: true)]
     #[Assert\NotBlank("Vous devez renseigner le numéro de téléphone du garage.")]
-    private ?int $tel = null;
+    private int $tel;
 
     #[ORM\OneToMany(mappedBy: 'garage', targetEntity: testimonial::class, orphanRemoval: true)]
     private Collection $testimonials;

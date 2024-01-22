@@ -13,12 +13,12 @@ class Gearbox
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type:"int")]
-    private ?int $id = null;
+    #[ORM\Column]
+    private int $id;
 
     #[ORM\Column(type:"string", length: 255)]
     #[Assert\NotBlank("Vous devez renseigner le type de la boîte de vitesse.")]
-    private ?string $name = null;
+    private string $name;
 
     #[ORM\OneToMany(mappedBy: 'gearboxes', targetEntity: Vehicle::class)]
     private Collection $vehicles;

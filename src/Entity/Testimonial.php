@@ -5,26 +5,38 @@ namespace App\Entity;
 use App\Repository\TestimonialRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: TestimonialRepository::class)]
+#[UniqueEntity(fields: ['name', 'surname'])]
 class Testimonial
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private int $id;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    #[ORM\Column(type:"string", length: 255)]
+    #[Assert\NotBlank("Vous devez renseigner votre nom.")]
+    #[Assert\Regex("^[a-zA-ZÀ-ÿ- ']+$
+    ")]
+    private string $name;
 
-    #[ORM\Column(length: 255)]
-    private ?string $surname = null;
+    #[ORM\Column(type:"string", length: 255)]
+    #[Assert\NotBlank("Vous devez renseigner votre prénom.")]
+    #[Assert\Regex("^[a-zA-ZÀ-ÿ- ']+$
+    ")]
+    private string $surname;
 
     #[ORM\Column(type: Types::TEXT, length: 20000)]
-    private ?string $message = null;
+    #[Assert\Length(min: 5, max: 20000, minMessage:"Votre commentaire doit avoir au moins {{ limit }} caractères", maxMessage:"Votre commentaire ne doit pas dépasser les {{ limit }} caractères.")]
+    private string $message;
 
-    #[ORM\Column]
-    private ?int $score = null;
+    #[ORM\Column(type:"integer")]
+    #[Assert\Positive]
+    #[Assert\Range(min: 1, max: 5)]
+    private int $score;
 
     #[ORM\Column(nullable: true)]
     private ?bool $is_actif = null;
