@@ -47,11 +47,11 @@ class Vehicle
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?energy $energies = null;
+    private ?Energy $energies = null;
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?model $models = null;
+    private ?Model $models = null;
 
     public function __construct()
     {

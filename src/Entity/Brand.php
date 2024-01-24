@@ -17,7 +17,7 @@ class Brand
     private int $id;
 
     #[ORM\Column(type:"string", length: 255)]
-    #[Assert\NotBlank("Vous devez renseigner le nom de la marque.")]
+    #[Assert\NotBlank(message:"Vous devez renseigner le nom de la marque.")]
     private string $name;
 
     #[ORM\OneToMany(mappedBy: 'brands', targetEntity: Vehicle::class)]
