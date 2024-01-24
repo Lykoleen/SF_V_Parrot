@@ -19,7 +19,7 @@ class Model
     private int $id;
 
     #[ORM\Column(type:"string", length: 255)]
-    #[Assert\NotBlank("Vous devez renseigner le modèle du véhicule.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner le modèle du véhicule.")]
     private string $name;
 
     #[ORM\OneToMany(mappedBy: 'models', targetEntity: Vehicle::class)]

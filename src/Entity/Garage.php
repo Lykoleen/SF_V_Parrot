@@ -19,11 +19,11 @@ class Garage
     private int $id;
 
     #[ORM\Column(type:"string", length: 255)]
-    #[Assert\NotBlank("Vous devez renseigner le nom du garage.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner le nom du garage.")]
     private string $name;
 
     #[ORM\Column(type:"string", length: 255)]
-    #[Assert\NotBlank("Vous devez renseigner l'email du garage.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner l'email du garage.")]
     #[Assert\Regex(
         pattern:"/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
     ",
@@ -31,11 +31,11 @@ class Garage
     private string $email;
 
     #[ORM\Column(type:"string", length: 255)]
-    #[Assert\NotBlank("Vous devez renseigner l'adresse' du garage.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner l'adresse' du garage.")]
     private string $adress;
 
     #[ORM\Column(type:"integer", nullable: true)]
-    #[Assert\NotBlank("Vous devez renseigner le numéro de téléphone du garage.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner le numéro de téléphone du garage.")]
     private int $tel;
 
     #[ORM\OneToMany(mappedBy: 'garage', targetEntity: Testimonial::class, orphanRemoval: true)]

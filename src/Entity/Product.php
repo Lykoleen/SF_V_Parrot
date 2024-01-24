@@ -17,16 +17,16 @@ class Product
     private int $id;
 
     #[ORM\Column(type:"string", length: 255, unique: true)]
-    #[Assert\NotBlank("Veuillez renseigner le nom du produit.")]
+    #[Assert\NotBlank(message: "Veuillez renseigner le nom du produit.")]
     private string $title;
 
     #[ORM\Column(type:"integer")]
-    #[Assert\NotBlank("Veuiller renseigner le prix du produit.")]
+    #[Assert\NotBlank(message: "Veuiller renseigner le prix du produit.")]
     #[Assert\PositiveOrZero("Le prix doit être supérieur ou égal à 0")]
     private float $price;
 
     #[ORM\Column(type:"integer")]
-    #[Assert\NotBlank("Veuiller renseigner la quantité du produit.")]
+    #[Assert\NotBlank(message: "Veuiller renseigner la quantité du produit.")]
     #[Assert\PositiveOrZero("La quantité doit être supérieure ou égale à 0")]
     private int $quantity;
 

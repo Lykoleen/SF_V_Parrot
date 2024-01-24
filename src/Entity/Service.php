@@ -20,11 +20,11 @@ class Service
     private int $id;
 
     #[ORM\Column(type:"string", length: 255)]
-    #[Assert\NotBlank("Vous devez renseigner le nom du service.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner le nom du service.")]
     private string $title;
 
     #[ORM\Column(type: Types::TEXT, length: 20000)]
-    #[Assert\NotBlank("Vous devez renseigner la description du service.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner la description du service.")]
     private string $description;
 
     #[ORM\OneToMany(mappedBy: 'services', targetEntity: Picture::class)]

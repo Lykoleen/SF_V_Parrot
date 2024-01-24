@@ -18,13 +18,13 @@ class Testimonial
     private int $id;
 
     #[ORM\Column(type:"string", length: 255)]
-    #[Assert\NotBlank("Vous devez renseigner votre nom.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner votre nom.")]
     #[Assert\Regex("^[a-zA-ZÀ-ÿ- ']+$
     ")]
     private string $name;
 
     #[ORM\Column(type:"string", length: 255)]
-    #[Assert\NotBlank("Vous devez renseigner votre prénom.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner votre prénom.")]
     #[Assert\Regex("^[a-zA-ZÀ-ÿ- ']+$
     ")]
     private string $surname;

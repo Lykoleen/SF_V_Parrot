@@ -19,7 +19,7 @@ class Category
     private int $id;
 
     #[ORM\Column(type:"string", length: 255)]
-    #[Assert\NotBlank("Vous devez renseigner un nom pour la catégorie.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner un nom pour la catégorie.")]
     private string $name;
 
     #[ORM\OneToMany(mappedBy: 'categories', targetEntity: Product::class)]

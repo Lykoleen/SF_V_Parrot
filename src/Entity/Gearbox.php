@@ -17,7 +17,7 @@ class Gearbox
     private int $id;
 
     #[ORM\Column(type:"string", length: 255)]
-    #[Assert\NotBlank("Vous devez renseigner le type de la boîte de vitesse.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner le type de la boîte de vitesse.")]
     private string $name;
 
     #[ORM\OneToMany(mappedBy: 'gearboxes', targetEntity: Vehicle::class)]

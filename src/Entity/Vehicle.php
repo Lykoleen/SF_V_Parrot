@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VehicleRepository::class)]
-class Vehicle
+class Vehicle extends Product
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,22 +18,22 @@ class Vehicle
     private int $id;
 
     #[ORM\Column(type:"string", length: 255)]
-    #[Assert\NotBlank("Vous devez renseigner le titre de l'annonce.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner le titre de l'annonce.")]
     private string $title;
 
     #[ORM\Column(type:"integer")]
-    #[Assert\NotBlank("Vous devez renseigner l'année du véhicule'.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner l'année du véhicule'.")]
     #[Assert\Positive]
     #[Assert\Range(min: 1000, max: 10000, minMessage:"Erreur, l'année renseignée est trop basse.", maxMessage:"Erreur, l'année renseignée est trop élevée.")]
     private int $years;
 
     #[ORM\Column(type:"integer")]
-    #[Assert\NotBlank("Vous devez renseigner le kilométrage du véhicule'.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner le kilométrage du véhicule'.")]
     #[Assert\PositiveOrZero]
     private int $mileage;
 
     #[ORM\Column(type: Types::TEXT, length: 20000)]
-    #[Assert\NotBlank("Vous devez renseigner une description pour le véhicule.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner une description pour le véhicule.")]
     private string $description;
 
     #[ORM\OneToMany(mappedBy: 'vehicles', targetEntity: Picture::class, orphanRemoval: true)]

@@ -19,7 +19,7 @@ class Energy
     private int $id;
 
     #[ORM\Column(type:"string", length: 255)]
-    #[Assert\NotBlank("Vous devez renseigner le nom du carburant.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner le nom du carburant.")]
     private string $name;
 
     #[ORM\OneToMany(mappedBy: 'energies', targetEntity: Vehicle::class)]
