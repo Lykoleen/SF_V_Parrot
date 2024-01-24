@@ -38,7 +38,7 @@ class Garage
     #[Assert\NotBlank("Vous devez renseigner le numéro de téléphone du garage.")]
     private int $tel;
 
-    #[ORM\OneToMany(mappedBy: 'garage', targetEntity: testimonial::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'garage', targetEntity: Testimonial::class, orphanRemoval: true)]
     private Collection $testimonials;
 
     #[ORM\OneToMany(mappedBy: 'garage', targetEntity: Schedule::class, orphanRemoval: true)]
