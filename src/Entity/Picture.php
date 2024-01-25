@@ -28,8 +28,7 @@ class Picture
     private ?Service $services = null;
 
     #[ORM\ManyToOne(inversedBy: 'pictures')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Vehicle $vehicles = null;
+    private ?Product $product = null;
 
     public function getId(): ?int
     {
@@ -72,14 +71,23 @@ class Picture
         return $this;
     }
 
-    public function getVehicles(): ?Vehicle
+
+    /**
+     * Get the value of products
+     */ 
+    public function getProduct(): ?Product
     {
-        return $this->vehicles;
+        return $this->product;
     }
 
-    public function setVehicles(?Vehicle $vehicles): static
+    /**
+     * Set the value of products
+     *
+     * @return  self
+     */ 
+    public function setProduct(?Product $product): static
     {
-        $this->vehicles = $vehicles;
+        $this->product = $product;
 
         return $this;
     }

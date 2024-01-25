@@ -12,15 +12,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: VehicleRepository::class)]
 class Vehicle extends Product
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private int $id;
-
-    #[ORM\Column(type:"string", length: 255)]
-    #[Assert\NotBlank(message: "Vous devez renseigner le titre de l'annonce.")]
-    private string $title;
-
     #[ORM\Column(type:"integer")]
     #[Assert\NotBlank(message: "Vous devez renseigner l'année du véhicule'.")]
     #[Assert\Positive]
@@ -35,9 +26,6 @@ class Vehicle extends Product
     #[ORM\Column(type: Types::TEXT, length: 20000)]
     #[Assert\NotBlank(message: "Vous devez renseigner une description pour le véhicule.")]
     private string $description;
-
-    #[ORM\OneToMany(mappedBy: 'vehicles', targetEntity: Picture::class, orphanRemoval: true)]
-    private Collection $pictures;
 
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     private ?Gearbox $gearboxes = null;
@@ -55,24 +43,7 @@ class Vehicle extends Product
 
     public function __construct()
     {
-        $this->pictures = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function gettitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function settitle(string $title): static
-    {
-        $this->title = $title;
-
-        return $this;
+        
     }
 
     public function getYears(): ?int
@@ -107,36 +78,6 @@ class Vehicle extends Product
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Picture>
-     */
-    public function getPictures(): Collection
-    {
-        return $this->pictures;
-    }
-
-    public function addPicture(Picture $picture): static
-    {
-        if (!$this->pictures->contains($picture)) {
-            $this->pictures->add($picture);
-            $picture->setVehicles($this);
-        }
-
-        return $this;
-    }
-
-    public function removePicture(Picture $picture): static
-    {
-        if ($this->pictures->removeElement($picture)) {
-            // set the owning side to null (unless already changed)
-            if ($picture->getVehicles() === $this) {
-                $picture->setVehicles(null);
-            }
-        }
 
         return $this;
     }
