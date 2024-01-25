@@ -22,12 +22,13 @@ class Model
     #[Assert\NotBlank(message: "Vous devez renseigner le modèle du véhicule.")]
     private string $name;
 
-    #[ORM\OneToMany(mappedBy: 'models', targetEntity: Vehicle::class)]
-    private Collection $vehicles;
+    #[ORM\ManyToOne(inversedBy: 'models')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Brand $brand = null;
 
     public function __construct()
     {
-        $this->vehicles = new ArrayCollection();
+     
     }
 
     public function getId(): ?int
@@ -47,32 +48,14 @@ class Model
         return $this;
     }
 
-    /**
-     * @return Collection<int, Vehicle>
-     */
-    public function getVehicles(): Collection
+    public function getBrand(): ?Brand
     {
-        return $this->vehicles;
+        return $this->brand;
     }
 
-    public function addVehicle(Vehicle $vehicle): static
+    public function setBrand(?Brand $brand): static
     {
-        if (!$this->vehicles->contains($vehicle)) {
-            $this->vehicles->add($vehicle);
-            $vehicle->setModels($this);
-        }
-
-        return $this;
-    }
-
-    public function removeVehicle(Vehicle $vehicle): static
-    {
-        if ($this->vehicles->removeElement($vehicle)) {
-            // set the owning side to null (unless already changed)
-            if ($vehicle->getModels() === $this) {
-                $vehicle->setModels(null);
-            }
-        }
+        $this->brand = $brand;
 
         return $this;
     }

@@ -22,12 +22,13 @@ class Type
     #[Assert\NotBlank("Vous devez renseigner un nom pour la sous-catégorie.")]
     private string $name;
 
-    #[ORM\OneToMany(mappedBy: 'types', targetEntity: Product::class)]
-    private Collection $products;
+    #[ORM\ManyToOne(inversedBy: 'types')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -47,33 +48,16 @@ class Type
         return $this;
     }
 
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProducts(): Collection
+    public function getCategory(): ?Category
     {
-        return $this->products;
+        return $this->category;
     }
 
-    public function addProduct(Product $product): static
+    public function setCategory(?Category $category): static
     {
-        if (!$this->products->contains($product)) {
-            $this->products->add($product);
-            $product->setTypes($this);
-        }
+        $this->category = $category;
 
         return $this;
     }
 
-    public function removeProduct(Product $product): static
-    {
-        if ($this->products->removeElement($product)) {
-            // set the owning side to null (unless already changed)
-            if ($product->getTypes() === $this) {
-                $product->setTypes(null);
-            }
-        }
-
-        return $this;
-    }
 }
