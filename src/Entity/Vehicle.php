@@ -37,10 +37,6 @@ class Vehicle extends Product
     #[ORM\JoinColumn(nullable: false)]
     private ?Energy $energies = null;
 
-    #[ORM\ManyToOne(inversedBy: 'vehicles')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Model $models = null;
-
     public function __construct()
     {
         
@@ -114,18 +110,6 @@ class Vehicle extends Product
     public function setEnergies(?energy $energies): static
     {
         $this->energies = $energies;
-
-        return $this;
-    }
-
-    public function getModels(): ?model
-    {
-        return $this->models;
-    }
-
-    public function setModels(?model $models): static
-    {
-        $this->models = $models;
 
         return $this;
     }

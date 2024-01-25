@@ -46,10 +46,6 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $categories = null;
 
-    #[ORM\ManyToOne(inversedBy: 'products')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Type $types = null;
-
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Picture::class)]
     private Collection $pictures;
 
@@ -131,18 +127,6 @@ class Product
     public function setCategories(?category $categories): static
     {
         $this->categories = $categories;
-
-        return $this;
-    }
-
-    public function getTypes(): ?type
-    {
-        return $this->types;
-    }
-
-    public function setTypes(?type $types): static
-    {
-        $this->types = $types;
 
         return $this;
     }
