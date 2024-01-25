@@ -6,6 +6,7 @@ use App\Entity\Brand;
 use App\Entity\Category;
 use App\Entity\Energy;
 use App\Entity\Garage;
+use App\Entity\Gearbox;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Menu\CrudMenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -52,5 +53,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Catégorie', 'fa-solid fa-c', Category::class);
         yield MenuItem::linkToCrud('Carburant', 'fa-solid fa-bolt', Energy::class);
         yield MenuItem::linkToCrud('Garage', 'fa-solid fa-warehouse', Garage::class);
+        yield MenuItem::linkToCrud('Boite de vitesse', 'fa-solid fa-gear', Gearbox::class);
     }
 }
