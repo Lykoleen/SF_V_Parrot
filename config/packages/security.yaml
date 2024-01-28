@@ -28,6 +28,10 @@ security:
                 path: /
                 always_remember_me: true
 
+            # by default, the feature allows 5 login attempts per minute
+            # limite le nombre de tentative de connexion (Brute Force)
+            login_throttling: null
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
 
