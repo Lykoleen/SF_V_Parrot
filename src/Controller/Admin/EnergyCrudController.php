@@ -3,9 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Energy;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class EnergyCrudController extends AbstractCrudController
@@ -15,14 +14,19 @@ class EnergyCrudController extends AbstractCrudController
         return Energy::class;
     }
 
-    /*
+    public function configureCrud(Crud $crud): Crud 
+    {
+        return $crud
+            ->setPageTitle(Crud::PAGE_INDEX, 'Carburant')
+            ->setEntityLabelInSingular('Carburant')
+            ->setEntityLabelInPlural('Carburants');
+    }
+
+
+    
     public function configureFields(string $pageName): iterable
     {
-        return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
-        ];
+        yield TextField::new('name', 'Nom');
     }
-    */
+    
 }
