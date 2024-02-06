@@ -2,23 +2,27 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="robots" content="noindex">
+        <meta name="author" content="Tony Rabillard /">
+        <meta name="description" content="Entretien et réparations de vos véhicules et vente de véhicules d'occasions.">
+        <title>Garage Vincent Parrot - {% block title %}Accueil{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
-            {{ ux_controller_link_tags() }}
         {% endblock %}
-
+        
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
-{% block importmap %}{{ importmap('app') }}{% endblock %}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
     <body>
+
         {% include "partials/_header.html.twig" %}
-
-        {% block body %}{% endblock %}
-
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
         {% include "partials/_footer.html.twig" %}
+
     </body>
 </html>
