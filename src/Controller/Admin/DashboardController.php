@@ -10,6 +10,7 @@ use App\Entity\Gearbox;
 use App\Entity\Model;
 use App\Entity\Testimonial;
 use App\Entity\Type;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Menu\CrudMenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -60,5 +61,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Modèle', 'fa-solid fa-m', Model::class);
         yield MenuItem::linkToCrud('Type', 'fa-solid fa-t', Type::class);
         yield MenuItem::linkToCrud('Avis Clients', 'fa-solid fa-star', Testimonial::class);
+        yield MenuItem::linkToCrud('Employés', 'fa-solid fa-users', User::class);
     }
 }

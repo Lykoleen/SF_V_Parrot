@@ -32,22 +32,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column(type:"string")]
-    #[Assert\NotBlank("Vous devez saisir un mot de passe avec au minimum 12 caractères contenant au moins des minuscules, majuscules, chiffres et caractères spéciaux (@, $, !, %, *, ?, &)")]
-    #[Assert\Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{12,}$
-    ", message:"Vous devez saisir un mot de passe avec au minimum 12 caractères contenant au moins des minuscules, majuscules, chiffres et caractères spéciaux (@, $, !, %, *, ?, &)")]
-    #[Assert\EqualTo(propertyPath:"confirmPassword", message:"Les mots de passe ne sont pas identiques")]
+    #[Assert\Regex("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&.\/]{12,}$/
+    ", message: "12 caractères minimum requis avec au minimum une minuscule, une majuscule, un chiffre et 1 caractère spécial de cette liste (@, $, !, %, *, ?, &)")]
     private string $password;
 
-    #[ORM\Column(type:"string")]
-    #[Assert\NotBlank("Vous devez confirmer votre mot de passe.")]
-    private string $confirmPassword;
-
     #[ORM\Column(type:"string", length: 255)]
-    #[Assert\NotBlank("Vous devez renseigner votre prénom.")]
+    #[Assert\NotNull(message: "Vous devez renseigner votre prénom.")]
     private string $firstname;
 
     #[ORM\Column(type:"string", length: 255)]
-    #[Assert\NotBlank("Vous devez renseigner votre nom.")]
+    #[Assert\NotBlank(message: "Vous devez renseigner votre nom.")]
     private string $lastname;
 
     #[ORM\Column(type: 'json')]
@@ -182,23 +176,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * Get the value of confirmPassword
-     */ 
-    public function getConfirmPassword(): string
-    {
-        return $this->confirmPassword;
-    }
-
-    /**
-     * Set the value of confirmPassword
-     *
-     * @return  self
-     */ 
-    public function setConfirmPassword(string $confirmPassword): static
-    {
-        $this->confirmPassword = $confirmPassword;
-
-        return $this;
-    }
 }
