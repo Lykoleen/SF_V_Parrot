@@ -8,6 +8,7 @@ use App\Entity\Energy;
 use App\Entity\Garage;
 use App\Entity\Gearbox;
 use App\Entity\Model;
+use App\Entity\Service;
 use App\Entity\Testimonial;
 use App\Entity\Type;
 use App\Entity\User;
@@ -62,5 +63,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Type', 'fa-solid fa-t', Type::class);
         yield MenuItem::linkToCrud('Avis Clients', 'fa-solid fa-star', Testimonial::class);
         yield MenuItem::linkToCrud('Employés', 'fa-solid fa-users', User::class);
+        yield MenuItem::linkToCrud('Service', 'fa-regular fa-handshake', Service::class);
+
     }
 }
