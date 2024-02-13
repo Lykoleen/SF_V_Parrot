@@ -35,7 +35,7 @@ class ServiceCrudController extends AbstractCrudController
         yield TextField::new('title', 'Nom');
         yield TextEditorField::new('description', 'Description');
         yield TextareaField::new('imageFile', 'Télécharger une image')->setFormType(VichImageType::class)->hideOnIndex();
-        yield ImageField::new('imageName')->setBasePath($serviceImagePath)->hideOnForm();
+        yield ImageField::new('imageName', 'Image')->setBasePath($serviceImagePath)->hideOnForm();
             
     }
     
