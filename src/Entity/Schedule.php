@@ -17,14 +17,17 @@ class Schedule
     #[ORM\Column(type:"string", length: 255)]
     private string $day;
 
-    #[ORM\Column(type:"string", length: 255)]
-    private string $slot;
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $opening_morning = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $opening = null;
+    private ?\DateTimeInterface $closing_morning = null;
 
     #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $closing = null;
+    private ?\DateTimeInterface $opening_afternoon = null;
+
+    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $closing_afternoon = null;
 
     #[ORM\Column(nullable: true)]
     private ?bool $close = null;
@@ -32,6 +35,10 @@ class Schedule
     #[ORM\ManyToOne(inversedBy: 'schedules')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Garage $garage = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $closedAtLunchtime = null;
+
 
     public function getId(): ?int
     {
@@ -50,38 +57,26 @@ class Schedule
         return $this;
     }
 
-    public function getSlot(): ?string
+    public function getOpeningMorning(): ?\DateTimeInterface
     {
-        return $this->slot;
+        return $this->opening_morning;
     }
 
-    public function setSlot(string $slot): static
+    public function setOpeningMorning(?\DateTimeInterface $opening_morning): static
     {
-        $this->slot = $slot;
+        $this->opening_morning = $opening_morning;
 
         return $this;
     }
 
-    public function getOpening(): ?\DateTimeInterface
+    public function getClosingMorning(): ?\DateTimeInterface
     {
-        return $this->opening;
+        return $this->closing_morning;
     }
 
-    public function setOpening(?\DateTimeInterface $opening): static
+    public function setClosingMorning(?\DateTimeInterface $closing_morning): static
     {
-        $this->opening = $opening;
-
-        return $this;
-    }
-
-    public function getClosing(): ?\DateTimeInterface
-    {
-        return $this->closing;
-    }
-
-    public function setClosing(?\DateTimeInterface $closing): static
-    {
-        $this->closing = $closing;
+        $this->closing_morning = $closing_morning;
 
         return $this;
     }
@@ -106,6 +101,42 @@ class Schedule
     public function setGarage(?Garage $garage): static
     {
         $this->garage = $garage;
+
+        return $this;
+    }
+
+    public function getOpeningAfternoon(): ?\DateTimeInterface
+    {
+        return $this->opening_afternoon;
+    }
+
+    public function setOpeningAfternoon(?\DateTimeInterface $opening_afternoon): static
+    {
+        $this->opening_afternoon = $opening_afternoon;
+
+        return $this;
+    }
+
+    public function getClosingAfternoon(): ?\DateTimeInterface
+    {
+        return $this->closing_afternoon;
+    }
+
+    public function setClosingAfternoon(?\DateTimeInterface $closing_afternoon): static
+    {
+        $this->closing_afternoon = $closing_afternoon;
+
+        return $this;
+    }
+
+    public function isClosedAtLunchtime(): ?bool
+    {
+        return $this->closedAtLunchtime;
+    }
+
+    public function setClosedAtLunchtime(?bool $closedAtLunchtime): static
+    {
+        $this->closedAtLunchtime = $closedAtLunchtime;
 
         return $this;
     }
