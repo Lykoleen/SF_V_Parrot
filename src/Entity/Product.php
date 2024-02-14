@@ -31,7 +31,7 @@ class Product
     #[Assert\PositiveOrZero(message: "Le prix doit être supérieur ou égal à 0")]
     private float $price;
 
-    #[ORM\Column(type:"integer")]
+    #[ORM\Column(type:"integer", nullable: true)]
     #[Assert\NotBlank(message: "Veuiller renseigner la quantité du produit.")]
     #[Assert\PositiveOrZero(message: "La quantité doit être supérieure ou égale à 0")]
     private int $quantity;

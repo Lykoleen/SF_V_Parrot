@@ -14,6 +14,7 @@ use App\Entity\Service;
 use App\Entity\Testimonial;
 use App\Entity\Type;
 use App\Entity\User;
+use App\Entity\Vehicle;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Menu\CrudMenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -53,6 +54,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Employés', 'fa-solid fa-users', User::class);
         yield MenuItem::linkToCrud('Service', 'fa-regular fa-handshake', Service::class);
         yield MenuItem::linkToCrud('Horaires d\'ouverture', 'fa-solid fa-clock', Schedule::class);
-        yield MenuItem::linkToCrud('Produits', 'fa-solid fa-car', Product::class);
+        yield MenuItem::linkToCrud('Produits', 'fa-solid fa-boxes-stacked', Product::class);
+        yield MenuItem::linkToCrud('Véhicules', 'fa-solid fa-car', Vehicle::class);
     }
 }
