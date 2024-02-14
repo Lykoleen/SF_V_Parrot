@@ -2,11 +2,15 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Picture;
 use App\Entity\Product;
+use App\Form\Type\ProductImageType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
@@ -15,6 +19,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use phpDocumentor\Reflection\Types\Boolean;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Doctrine\ORM\QueryBuilder;
 
 class ProductCrudController extends AbstractCrudController
 {
@@ -29,14 +34,15 @@ class ProductCrudController extends AbstractCrudController
         ->setPageTitle(Crud::PAGE_INDEX, 'Produits')
         ->setEntityLabelInSingular('Produit')
         ->setEntityLabelInPlural('Produits')
-        ->setEntityPermission('ROLE_USER');
+        ->setEntityPermission('ROLE_USER')
+        ->setDefaultSort(['id' => 'DESC']);
     }
     
     public function configureFields(string $pageName): iterable
     {
         $mappingsParams = $this->getParameter('vich_uploader.mappings');
         $serviceImagePath = $mappingsParams['product']['uri_prefix'];
-
+        
         yield AssociationField::new('garage', 'Affiliation Garage');
         yield AssociationField::new('categories', 'Affiliation Catégorie');
         yield AssociationField::new('types', 'Type du produit');
@@ -44,8 +50,9 @@ class ProductCrudController extends AbstractCrudController
         yield NumberField::new('price', 'Prix');
         yield NumberField::new('quantity', 'Quantité à ajouter');
         yield BooleanField::new('availability', 'Disponibilité');
-        yield TextareaField::new('imageFile', 'Télécharger Images')->setFormType(VichImageType::class)->hideOnIndex();
-        yield ImageField::new('imageName', 'Image')->setBasePath($serviceImagePath)->hideOnForm();
+        yield CollectionField::new('pictures')
+            ->setEntryType(ProductImageType::class);
+        
     }
     
 }

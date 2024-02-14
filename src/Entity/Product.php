@@ -3,18 +3,18 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\HttpFoundation\File\File;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 #[ORM\InheritanceType("JOINED")]
 #[ORM\DiscriminatorColumn(name:"product_type", type:"string")]
 #[ORM\DiscriminatorMap(['product' => Product::class, 'vehicle' => Vehicle::class])]
 #[UniqueEntity('title', message:"Ce produit existe déjà.")]
-#[Vich\Uploadable]
+
 class Product
 {
     #[ORM\Id]
@@ -39,15 +39,6 @@ class Product
     #[ORM\Column(nullable: true)]
     private ?bool $availability = null;
 
-    #[Vich\UploadableField(mapping: 'product', fileNameProperty: 'imageName')]
-    private ?File $imageFile = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?string $imageName = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null;
-
     #[ORM\ManyToOne(inversedBy: 'products')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Garage $garage = null;
@@ -60,35 +51,12 @@ class Product
     #[ORM\JoinColumn(nullable: false)]
     private ?Type $types = null;
 
+    #[ORM\OneToMany(mappedBy: 'products', targetEntity: Picture::class, orphanRemoval: true, cascade: ['persist'])]
+    private Collection $pictures;
+
     public function __construct()
     {
-        
-    }
-
-    public function setImageFile(?File $imageFile = null): void
-    {
-        $this->imageFile = $imageFile;
-
-        if (null !== $imageFile) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
-        }
-    }
-
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
-    }
-
-    public function setImageName(?string $imageName): void
-    {
-        $this->imageName = $imageName;
-    }
-
-    public function getImageName(): ?string
-    {
-        return $this->imageName;
+        $this->pictures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -176,6 +144,36 @@ class Product
     public function setTypes(?type $types): static
     {
         $this->types = $types;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Picture>
+     */
+    public function getPictures(): Collection
+    {
+        return $this->pictures;
+    }
+
+    public function addPicture(Picture $picture): static
+    {
+        if (!$this->pictures->contains($picture)) {
+            $this->pictures->add($picture);
+            $picture->setProducts($this);
+        }
+
+        return $this;
+    }
+
+    public function removePicture(Picture $picture): static
+    {
+        if ($this->pictures->removeElement($picture)) {
+            // set the owning side to null (unless already changed)
+            if ($picture->getProducts() === $this) {
+                $picture->setProducts(null);
+            }
+        }
 
         return $this;
     }
