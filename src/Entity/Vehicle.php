@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\VehicleRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -15,7 +13,7 @@ class Vehicle extends Product
     #[ORM\Column(type:"integer")]
     #[Assert\NotBlank(message: "Vous devez renseigner l'année du véhicule'.")]
     #[Assert\Positive]
-    #[Assert\Range(min: 1000, max: 10000, minMessage:"Erreur, l'année renseignée est trop basse.", maxMessage:"Erreur, l'année renseignée est trop élevée.")]
+    #[Assert\Range(min: 1000, max: 10000, notInRangeMessage: "L'année doit être comprise entre {{ min }} et {{ max }}")]
     private int $years;
 
     #[ORM\Column(type:"integer")]
@@ -40,11 +38,6 @@ class Vehicle extends Product
     #[ORM\ManyToOne(inversedBy: 'vehicles')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Model $models = null;
-
-    public function __construct()
-    {
-       
-    }
 
     public function getYears(): ?int
     {

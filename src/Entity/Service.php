@@ -98,3 +98,6 @@ class Service
 
    
 }
+
+
+// Créer une relation entre Vehicle et Picture afin de pouvoir se servir de Vich et utiliser le collectionFIeld.

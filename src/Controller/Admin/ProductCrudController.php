@@ -20,6 +20,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use phpDocumentor\Reflection\Types\Boolean;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 use Doctrine\ORM\QueryBuilder;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 
 class ProductCrudController extends AbstractCrudController
 {
@@ -40,8 +41,6 @@ class ProductCrudController extends AbstractCrudController
     
     public function configureFields(string $pageName): iterable
     {
-        $mappingsParams = $this->getParameter('vich_uploader.mappings');
-        $serviceImagePath = $mappingsParams['product']['uri_prefix'];
         
         yield AssociationField::new('garage', 'Affiliation Garage');
         yield AssociationField::new('categories', 'Affiliation Catégorie');

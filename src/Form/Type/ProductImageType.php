@@ -10,6 +10,13 @@ use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ProductImageType extends AbstractType
 {
+    /**
+     * Undocumented function
+     *
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     * @return void
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('path', VichImageType::class, [

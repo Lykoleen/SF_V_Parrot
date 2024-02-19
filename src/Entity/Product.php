@@ -32,8 +32,6 @@ class Product
     private float $price;
 
     #[ORM\Column(type:"integer", nullable: true)]
-    #[Assert\NotBlank(message: "Veuiller renseigner la quantité du produit.")]
-    #[Assert\PositiveOrZero(message: "La quantité doit être supérieure ou égale à 0")]
     private int $quantity;
 
     #[ORM\Column(nullable: true)]
