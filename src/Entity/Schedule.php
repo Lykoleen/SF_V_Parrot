@@ -33,7 +33,7 @@ class Schedule
     private ?bool $close = null;
 
     #[ORM\ManyToOne(inversedBy: 'schedules')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Garage $garage = null;
 
     #[ORM\Column(nullable: true)]

@@ -38,7 +38,7 @@ class Product
     private ?bool $availability = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Garage $garage = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]

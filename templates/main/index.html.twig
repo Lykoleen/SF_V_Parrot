@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ websiteName }}{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
 
 <div class="example-wrapper">
-    <h1>Hello {{ websiteName }} ! ✅</h1>
+    <h1>Hello ! ✅</h1>
+
+    {{ form(form) }}
 
 </div>
 {% endblock %}

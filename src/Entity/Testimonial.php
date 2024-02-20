@@ -19,13 +19,13 @@ class Testimonial
 
     #[ORM\Column(type:"string", length: 255)]
     #[Assert\NotBlank(message: "Vous devez renseigner votre nom.")]
-    #[Assert\Regex("^[a-zA-ZÀ-ÿ- ']+$
+    #[Assert\Regex("/^\w+/
     ")]
     private string $name;
 
     #[ORM\Column(type:"string", length: 255)]
     #[Assert\NotBlank(message: "Vous devez renseigner votre prénom.")]
-    #[Assert\Regex("^[a-zA-ZÀ-ÿ- ']+$
+    #[Assert\Regex("/^\w+/
     ")]
     private string $surname;
 
@@ -42,7 +42,7 @@ class Testimonial
     private ?bool $is_actif = null;
 
     #[ORM\ManyToOne(inversedBy: 'testimonials')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Garage $garage = null;
 
     public function getId(): ?int
