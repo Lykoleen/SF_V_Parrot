@@ -43,15 +43,15 @@ class MainController extends AbstractController
         //     ->setSurname($surname)
         //     ->setMessage($message)
         //     ->setScore($score);
-
+        
         $form = $this->createForm(TestimonialType::class, $testimonialsInstance);
-
+        
         $form->handleRequest($request);
-
+        
         if ($form->isSubmitted() && $form->isValid()) {
             
             $testimonialsInstance = $form->getData();
-
+            
             $this->manager->persist($testimonialsInstance);
             $this->manager->flush();
 

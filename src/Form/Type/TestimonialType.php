@@ -37,7 +37,7 @@ class TestimonialType extends AbstractType
             ->add('message', TextareaType::class, [
                 'label' => 'Votre message',
                 'attr' => [
-                    'row' => 5
+                    'rows' => 5
                     ]
             ])
             ->add('is_actif', HiddenType::class, [
