@@ -1,21 +1,21 @@
-<div class="wrapper">
-	<header>
+<div class="wrapper-nav">
+	<header class="h-100">
 		<nav class="navbar navbar-expand-lg bg-body-tertiary">
 			<div class="container-fluid">
-				<a title="Lien redirigant vers la page d'accueil du site" href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 me-xl-5 text-dark text-decoration-none">
+				<a title="Lien redirigant vers la page d'accueil du site" href="/" class="d-flex align-items-end col-md-3 mb-2 me-xl-5 ms-md-5 text-dark text-decoration-none">
 					<img src="{{ asset('build/images/logo.svg') }}" alt="logo garage vincent parrot" height="60">
 				</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-					<div class="navbar-nav">
+					<div class="navbar-nav w-100 me-5 justify-content-end">
 						<a class="nav-link active" aria-current="page" href="/">Accueil</a>
 						<a class="nav-link" href="#">Nos services</a>
 						<a class="nav-link" href="#">Les occasions</a>
 						<a class="nav-link" href="#">Déposer un avis</a>
 						<a class="nav-link" href="#">Contact</a>
-						<div class="col-xl-1 text-end">
+						<div class="col-xl-1 text-end ms-3">
 							<a href="/login"><img src=" {{ asset('build/images/iconeconnexion.png') }} " alt="lien vers la page de connexion" height="25"></a>
 						</div>
 					</div>

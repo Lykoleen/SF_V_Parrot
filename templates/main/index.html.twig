@@ -1,14 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Accueil
+{% endblock %}
 
 {% block body %}
+	<div class="section-intro d-flex align-items-center">
+		<div class="px-4 mt-5 text-center container-intro">
+			<h1 class="display-5 fw-bold text-primary">BIENVENUE CHEZ NOTRE GARAGE AUTOMOBILE VINCENT PARROT</h1>
+			<div class="col-10 mx-auto">
+				<p class="lead mb-5">Que vous recherchiez des services d'entretien, de réparation, ou que vous souhaitiez acheter une voiture d’occasion, vous êtes au bon endroit !</p>
+				<div class="d-flex justify-content-center">
+					<button type="button" class="btn btn-primary">Voir les annonces</button>
+				</div>
+			</div>
+		</div>
+		<div class="overlay"></div>
+	</div>
 
-<div class="wrapper">
-    <h1>Hello ! ✅</h1>
+	<div class="section-testimonials col-10 col-md-8 col-lg-6 my-5 mx-auto">
+		<div class="testimonials-form">
+			{{ form(form) }}
+		</div>
+	</div>
 
 
-    {{ form(form) }}
-
-</div>
-{% endblock %}
+	{% endblock %}

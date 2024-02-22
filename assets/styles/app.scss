@@ -1,10 +1,9 @@
 
+// @import "init"; 
+@import "fonts";
+@import "header";
+@import "main";
+@import "footer";
 @import "custom";
 @import "~bootstrap/scss/bootstrap";
 
-/* Formulaire avis client */
-label.required:before {
-    content: "*";
-    color: rgb(255, 13, 0);
-    margin-right: 5px;
-}
