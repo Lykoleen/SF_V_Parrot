@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ServiceRepository;
 use App\Entity\Picture;
+use App\Repository\PictureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -72,6 +73,13 @@ class Service
     public function getPictures(): Collection
     {
         return $this->pictures;
+    }
+
+    public function getPicture(PictureRepository $picture)
+    {
+        $image = $picture->findOneByServiceId($this->getId());
+
+        return $image;
     }
 
     public function addPicture(Picture $picture): static

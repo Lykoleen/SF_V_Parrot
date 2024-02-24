@@ -1,5 +1,9 @@
 @import "custom";
 
+html, body {
+    overflow: none;
+}
+
 .container-main {
     font-family: $roboto;
     text-align: justify;
@@ -77,6 +81,34 @@ h1, h2, h3 {
     top: 0;
     left: 0;
     z-index: 1;
+}
+
+/* Section Services */
+
+.section-services h2 {
+    margin: 20px;
+    text-align: center;
+}
+
+.carte-service {
+    border: none !important;
+}
+
+.carte-service img {
+    border-radius: 24px;
+}
+
+.card-title {
+    color: #486284 !important;
+}
+
+.card-body div {
+    color: #8CA2C0;
+    text-align: justify;
+}
+
+.card-body h3 {
+    height: 70px;
 }
 
 /* Formulaire avis client */

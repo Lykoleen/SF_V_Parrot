@@ -16,12 +16,31 @@
 		</div>
 		<div class="overlay"></div>
 	</div>
-
+	<div class="section-services">
+		<h2>NOS SERVICES</h2>
+		<div class="col-12 col-lg-10 row row-cols-1 row-cols-md-2 row-cols-lg-3 mx-auto g-5">
+			{% set countService = 0 %}
+			{% for service in services %}
+				<div class="col">
+					<div class="card carte-service">
+						{% set imageService = imagesServices[countService] %}
+						{% dump(countService) %}
+						<img src="images/product/{{imageService}}" class="card-img-top" alt="affiche service {{ service.title }}">
+						<div class="card-body text-center">
+							<h3 class="card-title card-titre">{{ service.title }}</h3>
+							<p class="card-text">{{ service.description|raw }}</p>
+						</div>
+					</div>
+				</div>
+				{% set countService = countService + 1 %}
+			{% endfor %}
+		</div>
+	</div>
 	<div class="section-testimonials col-10 col-md-8 col-lg-6 my-5 mx-auto">
 		<div class="testimonials-form">
 			{{ form(form) }}
+			</div>
 		</div>
-	</div>
 
 
 	{% endblock %}
