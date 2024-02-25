@@ -13,6 +13,13 @@ h1, h2, h3 {
     font-family: $yeseva;
 }
 
+
+h2 {
+    display: block;
+    margin-bottom: 30px !important;
+    text-align: center;
+}
+
 /* Section Intro */
 
 .section-intro {
@@ -83,23 +90,18 @@ h1, h2, h3 {
     z-index: 1;
 }
 
-/* Section Services */
+/* Section Services et Annonces */
 
-.section-services h2 {
-    margin: 20px;
-    text-align: center;
-}
-
-.carte-service {
+.card {
     border: none !important;
 }
 
-.carte-service img {
+.card img {
     border-radius: 24px;
 }
 
-.card-title {
-    color: #486284 !important;
+.card-title-service {
+    color: $otherText !important;
 }
 
 .card-body div {
@@ -109,6 +111,37 @@ h1, h2, h3 {
 
 .card-body h3 {
     height: 70px;
+}
+
+.section-vehicles {
+    background-color: $bgSection;
+}
+
+.section-vehicles h2 {
+    color: white;
+}
+
+.card-annonce {
+    background-color: $bgSection !important;
+}
+
+.card-title-annonce {
+    color: white !important;
+}
+
+.infos-supp-vehicle {
+    width: 210px;
+}
+
+.infos-supp-vehicle p {
+    color: white;
+}
+
+.btn-annonce {
+    border-radius: 24px !important;
+    width: 80px;
+    color: white !important;
+    font-weight: bold !important;
 }
 
 /* Formulaire avis client */

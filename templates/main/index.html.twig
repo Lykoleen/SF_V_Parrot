@@ -16,23 +16,60 @@
 		</div>
 		<div class="overlay"></div>
 	</div>
-	<div class="section-services">
+	<div class="section-services py-5">
 		<h2>NOS SERVICES</h2>
 		<div class="col-12 col-lg-10 row row-cols-1 row-cols-md-2 row-cols-lg-3 mx-auto g-5">
 			{% set countService = 0 %}
 			{% for service in services %}
 				<div class="col">
-					<div class="card carte-service">
+					<div class="card card-service">
 						{% set imageService = imagesServices[countService] %}
-						{% dump(countService) %}
 						<img src="images/product/{{imageService}}" class="card-img-top" alt="affiche service {{ service.title }}">
 						<div class="card-body text-center">
-							<h3 class="card-title card-titre">{{ service.title }}</h3>
+							<h3 class="card-title card-title-service">{{ service.title }}</h3>
 							<p class="card-text">{{ service.description|raw }}</p>
 						</div>
 					</div>
 				</div>
 				{% set countService = countService + 1 %}
+			{% endfor %}
+		</div>
+	</div>
+	<div class="section-vehicles py-5">
+		<h2>NOS VÉHICULES D’OCCASION</h2>
+		<div class="col-12 col-lg-10 row row-cols-1 row-cols-md-2 row-cols-lg-3 mx-auto g-5">
+			{% set countVehicle = 0 %}
+			{% for vehicle in vehicles %}
+				<div class="col">
+					<div class="card card-annonce">
+						{% set imageVehicle = imagesVehicles[countVehicle] %}
+						{% set nameBrand = nameBrands[countVehicle] %}
+						{% set nameModel = nameModels[countVehicle] %}
+						{% set price = prices[countVehicle] %}
+						<img src="images/product/{{imageVehicle}}" class="card-img-top" alt="affiche véhicule {{ nameBrand ~ nameModel ~ vehicle.title }}">
+						<div class="card-body text-center">
+							<h3 class="card-title card-title-annonce">{{ nameBrand }}
+								{{ nameModel }}
+								{{ vehicle.title }}</h3>
+							<div class="infos-supp-vehicle d-flex justify-content-between mx-auto">
+								<p class="card-text">{{ price }}
+									€ |</p>
+								<p class="card-text"> {{ vehicle.years }}
+									|</p>
+								<p class="card-text"> {{ vehicle.mileage }}
+									kms</p>
+							</div>
+						</div>
+						<div class="d-flex justify-content-center">
+							<a href="/annonces/lire/{{ vehicle.id }}">
+								<div class="d-flex justify-content-center">
+									<button type="button" class="btn btn-primary btn-annonce">Voir</button>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				{% set countVehicle = countVehicle + 1 %}
 			{% endfor %}
 		</div>
 	</div>
