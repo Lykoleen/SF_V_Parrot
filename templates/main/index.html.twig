@@ -10,7 +10,7 @@
 			<div class="col-10 mx-auto">
 				<p class="lead mb-5">Que vous recherchiez des services d'entretien, de réparation, ou que vous souhaitiez acheter une voiture d’occasion, vous êtes au bon endroit !</p>
 				<div class="d-flex justify-content-center">
-					<button type="button" class="btn btn-primary">Voir les annonces</button>
+					<button type="button" class="btn btn-primary btn-all-annonces">Voir les annonces</button>
 				</div>
 			</div>
 		</div>
@@ -54,9 +54,11 @@
 							<div class="infos-supp-vehicle d-flex justify-content-between mx-auto">
 								<p class="card-text">{{ price }}
 									€ |</p>
-								<p class="card-text"> {{ vehicle.years }}
+								<p class="card-text">
+									{{ vehicle.years }}
 									|</p>
-								<p class="card-text"> {{ vehicle.mileage }}
+								<p class="card-text">
+									{{ vehicle.mileage }}
 									kms</p>
 							</div>
 						</div>
@@ -72,8 +74,57 @@
 				{% set countVehicle = countVehicle + 1 %}
 			{% endfor %}
 		</div>
+		<div class="d-flex justify-content-center">
+			<button type="button" class="btn btn-primary btn-all-annonces">Toutes les annonces</button>
+		</div>
 	</div>
-	<div class="section-testimonials col-10 col-md-8 col-lg-6 my-5 mx-auto">
+	<div class="section-testimonials col-10 col-md-8 col-xxl-6 my-5 mx-auto">
+			<h2>LES AVIS DE NOS CLIENTS</h2>
+		<div class="carousel-avis">
+			<div id="carouselExampleControls" class="carousel carousel-dark slide" data-bs-ride="carousel">
+				<div class="carousel-inner">
+					{% for i in range(0, testimonials|length-1, 2) %}
+						{% set avis1 = testimonials[i] %}
+						{% set avis2 = (i + 1 < testimonials|length) ? testimonials[i + 1] : null %}
+						<div class="carousel-item {{ (i == 0) ? 'active' : '' }}">
+							<div class="all-container-avis">
+								<div class="container-avis">
+									<div class="note-client">
+										<img src="../assets/images/etoile{{ avis1.score }}.jpg" alt="Note client égale à {{ avis1.score }}">
+									</div>
+									<h3 class="name-client">
+										{{ avis1.surname }}
+										{{ avis1.name }}
+									</h3>
+									{{ avis1.message|raw }}
+								</div>
+								{% if avis2 %}
+									<div class="container-avis-2">
+										<div class="note-client">
+											<img src="../assets/images/etoile{{ avis2.score }}.jpg" alt="Note client égale à {{ avis2.score }}">
+										</div>
+										<h3 class="name-client">
+											{{ avis2.surname }}
+											{{ avis2.name }}
+										</h3>
+										{{ avis2.message|raw }}
+									</div>
+								{% endif %}
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+				<button class="carousel-control-prev justify-content-start" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next justify-content-end" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
+
+		</div>
 		<div class="testimonials-form">
 			{{ form(form) }}
 			</div>
