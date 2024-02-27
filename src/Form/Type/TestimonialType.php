@@ -15,30 +15,30 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class TestimonialType extends AbstractType
 {
 
-    public function buildForm(FormBuilderInterface $builder, array $options):void
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class, [
-                'label' => 'Nom'
-            ])
-            ->add('surname', TextType::class, [
-                'label' => 'Prénom'
-            ])
             ->add('score', ChoiceType::class, [
-                'label' => 'Votre note',
                 'choices' => [
                     '1' => 1,
                     '2' => 2,
                     '3' => 3,
                     '4' => 4,
                     '5' => 5
-                ]
+                ],
+                "expanded" => "false"
+            ])
+            ->add('name', TextType::class, [
+                'label' => 'Nom :'
+            ])
+            ->add('surname', TextType::class, [
+                'label' => 'Prénom :'
             ])
             ->add('message', TextareaType::class, [
-                'label' => 'Votre message',
+                'label' => 'Commentaire :',
                 'attr' => [
                     'rows' => 5
-                    ]
+                ]
             ])
             ->add('is_actif', HiddenType::class, [
                 'data' => 0
@@ -54,5 +54,4 @@ class TestimonialType extends AbstractType
             'data_class' => Testimonial::class,
         ]);
     }
-
 }

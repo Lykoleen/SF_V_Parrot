@@ -184,12 +184,103 @@ h2 {
     display: none;
 }
 
+
+
 /* Formulaire avis client */
-label.required:before {
+.form-label:before {
     content: "*";
     color: rgb(255, 13, 0);
     margin-right: 5px;
 }
+
+#testimonial {
+    position: relative;
+}
+
+#testimonial label {
+    color: #667080;
+}
+
+
+#testimonial legend {
+    display: none;
+}
+
+#testimonial_name, #testimonial_surname {
+    height: 45px;
+}
+
+#testimonial_name, #testimonial_surname, #testimonial_message {
+    background-color: #EEF1F4 !important;
+}
+
+#testimonial_Envoyer {
+    position: absolute;
+    bottom: -70px;
+    right: 0;
+    height: 45px;
+    margin-top: 10px;
+    background-color: $secondary;
+    color: white;
+    border-radius: 24px;
+    width: 140px;
+    font-weight: bold;
+}
+
+#testimonial_score {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+#testimonial_score > div {
+    padding: 0;
+}
+
+.form-check input[type="radio"] {
+    display: none;
+}
+
+.form-check label:hover {
+    cursor: pointer;
+}
+
+.form-check label {
+    width: 40px;
+    height: 40px;
+    color: transparent !important;
+    background-image: url(../images/etoile_vote.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    transition: background 0.4s; 
+}
+
+.form-check label.checked {
+    background-image: url(../images/etoile_remplie.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.star-1.checked {
+    transition-delay: 0s;
+}
+
+.star-2.checked {
+    transition-delay: 0.1s;
+  }
+
+.star-3.checked {
+    transition-delay: 0.2s;
+  }
+
+.star-4.checked {
+    transition-delay: 0.3s;
+  }
+
+.star-5.checked {
+    transition-delay: 0.4s;
+  }
 
 @media screen and (min-width: 1200px) {
     
