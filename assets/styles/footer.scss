@@ -1,0 +1,23 @@
+
+.container-infos-footer {
+    position: relative;
+}
+
+footer {
+    background-color: black;
+    color: white;
+}
+
+.logo-footer {
+    margin: auto;
+    margin-top: 30px;
+    width: 150px;
+}
+
+.reseaux {
+    width: 150px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}

@@ -1,41 +1,136 @@
-<footer class="py-5">
-    <div class="row mt-5 mx-4">
-      <div class="col-2">
-        <h5>Section</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-          <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
-        </ul>
-      </div>
+<footer>
+	<div class="container-infos-footer row mt-5 mx-4">
+		<div class="logo_et_reseaux">
+			<div class="logo-footer"><img class="logo_blanc" src="../assets/images/logo_blanc.svg" alt="logo du garage automobile de monsieur parrot vincent"></div>
+			<div class="reseaux">
+				<ul class="list-unstyled d-flex justify-content-between mx-auto">
+					<li>
+						<a href="https://www.facebook.com/" target="_blank"><img src="../assets/images/facebook.svg" alt="logo du garage automobile de monsieur parrot vincent"></a>
+					</li>
+					<li>
+						<a href="https://twitter.com/" target="_blank"><img class="twitter" src="../assets/images/twitter.svg" alt="logo du garage automobile de monsieur parrot vincent"></a>
+					</li>
+					<li>
+						<a href="https://www.instagram.com/" target="_blank"><img src="../assets/images/instagram.svg" alt="logo du garage automobile de monsieur parrot vincent"></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="grid container-hia">
+			<div class="horaires g-col-12 text-center my-4">
+				<h3 class="mb-3">Horaires</h3>
+				{% for schedule in posts %}
+					<div class="jours-ouvertures d-flex justify-content-center">
+						{% if schedule.close == true %}
+							<p class="mb-2">{{ schedule.day|slice(0, 3) }}</p>
+							<p class="ms-2 mb-2">Fermé</p>
+						{% elseif schedule.closedAtLunchTime == false and schedule.close == false %}
+							<p class="mb-2">{{ schedule.day|slice(0, 3) }}</p>
+							<p class="ms-2 mb-2">{{ schedule.openingMorning|date('H:i') }}
+								-</p>
+							{% if schedule.closingMorning is not empty %}
+								<p class="ms-1 mb-2">{{ schedule.closingMorning|date('H:i') }}</p>
+							{% else %}
+								<p class="ms-1 mb-2">{{ schedule.closingAfternoon|date('H:i') }}</p>
+							{% endif %}
 
-      {% for schedule in posts %}
-          
-            {{ schedule.closingMorning|date('H:i:s') }}
-          
-      {% endfor %}
+						{% else %}
+							<p class="mb-2">{{ schedule.day|slice(0, 3) }}</p>
+							<p class="ms-2 mb-2">{{ schedule.openingMorning|date('H:i') }}
+								-</p>
+							<p class="ms-1 mb-2">{{ schedule.closingMorning|date('H:i') }},</p>
+							<p class="ms-1 mb-2">{{ schedule.openingAfternoon|date('H:i') }}
+								-</p>
+							<p class="ms-1 mb-2">{{ schedule.closingAfternoon|date('H:i') }}</p>
+						{% endif %}
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="infos-garage g-col-12 text-center">
+			<h3>Informations</h3>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2">
+					<a href="#" class="nav-link p-0 text-muted">Accueil</a>
+				</li>
+				<li class="nav-item mb-2">
+					<a href="#" class="nav-link p-0 text-muted">Nos Services</a>
+				</li>
+				<li class="nav-item mb-2">
+					<a href="#" class="nav-link p-0 text-muted">Les occasions</a>
+				</li>
+				<li class="nav-item mb-2">
+					<a href="#" class="nav-link p-0 text-muted">Déposer un avis</a>
+				</li>
+				<li class="nav-item mb-2">
+					<a href="#" class="nav-link p-0 text-muted">Contact</a>
+				</li>
+			</ul>
+		</div>
+		<div class="col-2">
+			<h5>Section</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-2">
+					<a href="#" class="nav-link p-0 text-muted">Accueil</a>
+				</li>
+				<li class="nav-item mb-2">
+					<a href="#" class="nav-link p-0 text-muted">Nos Services</a>
+				</li>
+				<li class="nav-item mb-2">
+					<a href="#" class="nav-link p-0 text-muted">Les occasions</a>
+				</li>
+				<li class="nav-item mb-2">
+					<a href="#" class="nav-link p-0 text-muted">Déposer un avis</a>
+				</li>
+				<li class="nav-item mb-2">
+					<a href="#" class="nav-link p-0 text-muted">Contact</a>
+				</li>
+			</ul>
+		</div>
 
-      <div class="col-4 offset-1">
-        <form>
-          <h5>Subscribe to our newsletter</h5>
-          <p>Monthly digest of whats new and exciting from us.</p>
-          <div class="d-flex w-100 gap-2">
-            <label for="newsletter1" class="visually-hidden">Email address</label>
-            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-            <button class="btn btn-primary" type="button">Subscribe</button>
-          </div>
-        </form>
-      </div>
-    </div>
+		{% for schedule in posts %}
 
-    <div class="d-flex justify-content-between py-4 my-4 border-top mx-4">
-      <p>© 2021 Company, Inc. All rights reserved.</p>
-      <ul class="list-unstyled d-flex">
-        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
-        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-        <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
-      </ul>
-    </div>
-  </footer>
+			{{ schedule.closingMorning|date('H:i:s') }}
+
+		{% endfor %}
+
+		<div class="col-4 offset-1">
+			<form>
+				<h5>Subscribe to our newsletter</h5>
+				<p>Monthly digest of whats new and exciting from us.</p>
+				<div class="d-flex w-100 gap-2">
+					<label for="newsletter1" class="visually-hidden">Email address</label>
+					<input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+					<button class="btn btn-primary" type="button">Subscribe</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<div class="d-flex justify-content-between py-4 my-4 border-top mx-4">
+		<p>© 2021 Company, Inc. All rights reserved.</p>
+		<ul class="list-unstyled d-flex">
+			<li class="ms-3">
+				<a class="link-dark" href="#">
+					<svg class="bi" width="24" height="24">
+						<use xlink:href="#twitter"></use>
+					</svg>
+				</a>
+			</li>
+			<li class="ms-3">
+				<a class="link-dark" href="#">
+					<svg class="bi" width="24" height="24">
+						<use xlink:href="#instagram"></use>
+					</svg>
+				</a>
+			</li>
+			<li class="ms-3">
+				<a class="link-dark" href="#">
+					<svg class="bi" width="24" height="24">
+						<use xlink:href="#facebook"></use>
+					</svg>
+				</a>
+			</li>
+		</ul>
+	</div>
+</footer>
