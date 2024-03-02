@@ -2,6 +2,7 @@
 
 namespace App\Twig;
 
+use App\Repository\GarageRepository;
 use Twig\Environment;
 use Twig\TwigFunction;
 use Twig\Extension\AbstractExtension;
@@ -13,12 +14,14 @@ class FooterExtension extends AbstractExtension
 {
 
     private $scheduleRepository;
+    private $garageRepository;
     private $twig;
     private $cache;
     
-    public function __construct(ScheduleRepository $scheduleRepository, Environment $twig, CacheInterface $cache)
+    public function __construct(GarageRepository $garageRepository, ScheduleRepository $scheduleRepository, Environment $twig, CacheInterface $cache)
     {
         $this->scheduleRepository = $scheduleRepository;
+        $this->garageRepository = $garageRepository;
         $this->twig = $twig;
         $this->cache = $cache;
     }
@@ -42,9 +45,11 @@ class FooterExtension extends AbstractExtension
     {
        
         $posts = $this->scheduleRepository->findAll();
+        $garage = $this->garageRepository->find(1);
 
         return $this->twig->render('partials/_footer.html.twig', [
-            'posts' => $posts
+            'posts' => $posts,
+            'garage' => $garage
         ]);
     }
 }

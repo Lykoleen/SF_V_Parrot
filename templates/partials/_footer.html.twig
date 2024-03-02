@@ -1,5 +1,5 @@
 <footer>
-	<div class="container-infos-footer row mt-5 mx-4">
+	<div class="container-infos-footer row mt-5 mx-4 pb-5">
 		<div class="logo_et_reseaux">
 			<div class="logo-footer"><img class="logo_blanc" src="../assets/images/logo_blanc.svg" alt="logo du garage automobile de monsieur parrot vincent"></div>
 			<div class="reseaux">
@@ -46,91 +46,55 @@
 					</div>
 				{% endfor %}
 			</div>
-		</div>
-		<div class="infos-garage g-col-12 text-center">
-			<h3>Informations</h3>
-			<ul class="nav flex-column">
-				<li class="nav-item mb-2">
-					<a href="#" class="nav-link p-0 text-muted">Accueil</a>
-				</li>
-				<li class="nav-item mb-2">
-					<a href="#" class="nav-link p-0 text-muted">Nos Services</a>
-				</li>
-				<li class="nav-item mb-2">
-					<a href="#" class="nav-link p-0 text-muted">Les occasions</a>
-				</li>
-				<li class="nav-item mb-2">
-					<a href="#" class="nav-link p-0 text-muted">Déposer un avis</a>
-				</li>
-				<li class="nav-item mb-2">
-					<a href="#" class="nav-link p-0 text-muted">Contact</a>
-				</li>
-			</ul>
-		</div>
-		<div class="col-2">
-			<h5>Section</h5>
-			<ul class="nav flex-column">
-				<li class="nav-item mb-2">
-					<a href="#" class="nav-link p-0 text-muted">Accueil</a>
-				</li>
-				<li class="nav-item mb-2">
-					<a href="#" class="nav-link p-0 text-muted">Nos Services</a>
-				</li>
-				<li class="nav-item mb-2">
-					<a href="#" class="nav-link p-0 text-muted">Les occasions</a>
-				</li>
-				<li class="nav-item mb-2">
-					<a href="#" class="nav-link p-0 text-muted">Déposer un avis</a>
-				</li>
-				<li class="nav-item mb-2">
-					<a href="#" class="nav-link p-0 text-muted">Contact</a>
-				</li>
-			</ul>
-		</div>
-
-		{% for schedule in posts %}
-
-			{{ schedule.closingMorning|date('H:i:s') }}
-
-		{% endfor %}
-
-		<div class="col-4 offset-1">
-			<form>
-				<h5>Subscribe to our newsletter</h5>
-				<p>Monthly digest of whats new and exciting from us.</p>
-				<div class="d-flex w-100 gap-2">
-					<label for="newsletter1" class="visually-hidden">Email address</label>
-					<input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-					<button class="btn btn-primary" type="button">Subscribe</button>
-				</div>
-			</form>
+			<div class="infos-garage g-col-12 mb-5 text-center">
+				<h3 class="mb-3">Informations</h3>
+					<ul class="list-infos-garage nav flex-column">
+						<li class="li-nom-garage mb-2">
+							{{ garage.name }}
+						</li>
+						<li class="li-num mb-2">
+							Tel: {{ garage.tel }}
+						</li>
+						<li class="li-email mb-2">
+							Email: {{ garage.email }}
+						</li>
+						<li class="li-adresse mb-2">
+							{{ garage.adress }}
+						</li>
+					</ul>
+			</div>
+			<div class="acces-rapide g-col-12 mt-4 mb-5 text-center">
+				<h5>Accès rapide</h5>
+				<ul class="nav flex-column">
+					<li class="nav-item mb-2">
+						<a href="/" class="nav-link p-0 text-white">Accueil</a>
+					</li>
+					<li class="nav-item mb-2">
+						<a href="#" class="nav-link p-0 text-white">Nos Services</a>
+					</li>
+					<li class="nav-item mb-2">
+						<a href="#" class="nav-link p-0 text-white">Les occasions</a>
+					</li>
+					<li class="nav-item mb-2">
+						<a href="#" class="nav-link p-0 text-white">Déposer un avis</a>
+					</li>
+					<li class="nav-item mb-2">
+						<a href="#" class="nav-link p-0 text-white">Contact</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 
-	<div class="d-flex justify-content-between py-4 my-4 border-top mx-4">
-		<p>© 2021 Company, Inc. All rights reserved.</p>
-		<ul class="list-unstyled d-flex">
-			<li class="ms-3">
-				<a class="link-dark" href="#">
-					<svg class="bi" width="24" height="24">
-						<use xlink:href="#twitter"></use>
-					</svg>
-				</a>
-			</li>
-			<li class="ms-3">
-				<a class="link-dark" href="#">
-					<svg class="bi" width="24" height="24">
-						<use xlink:href="#instagram"></use>
-					</svg>
-				</a>
-			</li>
-			<li class="ms-3">
-				<a class="link-dark" href="#">
-					<svg class="bi" width="24" height="24">
-						<use xlink:href="#facebook"></use>
-					</svg>
-				</a>
-			</li>
-		</ul>
+	<div class="container-mentions my-4 mx-4">
+		<div class="link-mentions">
+			<div class="politique-mentions">
+				<a href="" class="text-white">Mentions légales</a>
+				<a href="" class="text-white">Politique de confidentialité</a>
+			</div>
+			<div class="droits">
+				<a href="" class="text-white">©2023 Garage V.Parrot. Tous droits réservés.</a>
+			</div>
+		</div>
 	</div>
 </footer>

@@ -4,6 +4,10 @@
 }
 
 footer {
+    box-shadow: 0 50px black;
+}
+
+footer, .container-infos-footer{
     background-color: black;
     color: white;
 }
@@ -20,4 +24,21 @@ footer {
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.acces-rapide {
+    display: none;
+}
+
+.container-mentions {
+    text-align: center;
+}
+
+.politique-mentions {
+    display: flex;
+    flex-direction: column;
+}
+
+.politique-mentions a, .droits a {
+    text-decoration: none;
 }
