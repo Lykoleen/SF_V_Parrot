@@ -1,6 +1,12 @@
 
 .container-infos-footer {
     position: relative;
+    max-width: 1500px;
+    margin: auto;
+}
+
+.container-mentions {
+    max-width: 1500px;
 }
 
 footer {
@@ -34,11 +40,37 @@ footer, .container-infos-footer{
     text-align: center;
 }
 
-.politique-mentions {
-    display: flex;
-    flex-direction: column;
-}
-
 .politique-mentions a, .droits a {
     text-decoration: none;
+}
+
+@media screen and (min-width: 1200px) {
+
+    .logo-et-reseaux {
+        margin-left: 40px;
+        margin-right: 10%;
+    }
+
+    .logo-footer {
+        width: 250px;
+        margin: 0;
+    }
+
+    .reseaux {
+        width: 150px;
+        position: static;
+        margin: 0;
+        transform: none;
+    }
+
+    .acces-rapide {
+        display: block;
+    }
+
+    .container-mentions {
+        border-top: 1px solid $primary;
+        width: 95%;
+        margin: auto;
+    }
+
 }

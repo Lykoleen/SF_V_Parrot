@@ -1,6 +1,6 @@
 <footer>
-	<div class="container-infos-footer row mt-5 mx-4 pb-5">
-		<div class="logo_et_reseaux">
+	<div class="container-infos-footer d-flex flex-column flex-xl-row mt-5 pb-5">
+		<div class="logo-et-reseaux d-flex flex-column justify-content-xl-around col-12 col-xl-3 col-mb-3">
 			<div class="logo-footer"><img class="logo_blanc" src="../assets/images/logo_blanc.svg" alt="logo du garage automobile de monsieur parrot vincent"></div>
 			<div class="reseaux">
 				<ul class="list-unstyled d-flex justify-content-between mx-auto">
@@ -16,11 +16,11 @@
 				</ul>
 			</div>
 		</div>
-		<div class="grid container-hia">
-			<div class="horaires g-col-12 text-center my-4">
+		<div class="d-flex flex-column flex-xl-row container-hia col-12 col-xl-9">
+			<div class="horaires col text-center text-xl-start my-4">
 				<h3 class="mb-3">Horaires</h3>
 				{% for schedule in posts %}
-					<div class="jours-ouvertures d-flex justify-content-center">
+					<div class="jours-ouvertures d-flex justify-content-center justify-content-xl-start">
 						{% if schedule.close == true %}
 							<p class="mb-2">{{ schedule.day|slice(0, 3) }}</p>
 							<p class="ms-2 mb-2">Fermé</p>
@@ -46,7 +46,7 @@
 					</div>
 				{% endfor %}
 			</div>
-			<div class="infos-garage g-col-12 mb-5 text-center">
+			<div class="infos-garage col my-4 mb-5 text-center text-xl-start">
 				<h3 class="mb-3">Informations</h3>
 					<ul class="list-infos-garage nav flex-column">
 						<li class="li-nom-garage mb-2">
@@ -63,8 +63,8 @@
 						</li>
 					</ul>
 			</div>
-			<div class="acces-rapide g-col-12 mt-4 mb-5 text-center">
-				<h5>Accès rapide</h5>
+			<div class="acces-rapide col mt-4 mb-5 text-center text-xl-start">
+				<h3 class="mb-3">Accès rapide</h3>
 				<ul class="nav flex-column">
 					<li class="nav-item mb-2">
 						<a href="/" class="nav-link p-0 text-white">Accueil</a>
@@ -86,9 +86,9 @@
 		</div>
 	</div>
 
-	<div class="container-mentions my-4 mx-4">
-		<div class="link-mentions">
-			<div class="politique-mentions">
+	<div class="container-mentions my-4">
+		<div class="link-mentions d-xl-flex flex-xl-row-reverse justify-content-between my-5">
+			<div class="politique-mentions d-flex flex-column flex-xl-row-reverse justify-content-xl-end gap-xl-5">
 				<a href="" class="text-white">Mentions légales</a>
 				<a href="" class="text-white">Politique de confidentialité</a>
 			</div>
