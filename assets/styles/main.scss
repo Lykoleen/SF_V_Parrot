@@ -184,20 +184,19 @@ h2 {
     display: none;
 }
 
+/* Formulaire avis client et Formulaire de Contact pour la page de contact et la page des annonces*/
 
-
-/* Formulaire avis client */
 .form-label:before {
     content: "*";
     color: rgb(255, 13, 0);
     margin-right: 5px;
 }
 
-#testimonial {
+#testimonial, #contact {
     position: relative;
 }
 
-#testimonial label {
+#testimonial label, #contact label {
     color: #667080;
 }
 
@@ -210,11 +209,11 @@ h2 {
     height: 45px;
 }
 
-#testimonial_name, #testimonial_surname, #testimonial_message {
+#testimonial_name, #testimonial_surname, #testimonial_message, #contact_name, #contact_surname, #contact_subject, #contact_email, #contact_message {
     background-color: #EEF1F4 !important;
 }
 
-#testimonial_Envoyer {
+#testimonial_Envoyer, #contact_Envoyer {
     position: absolute;
     bottom: -70px;
     right: 0;

@@ -31,7 +31,7 @@ class ScheduleCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         
-        yield AssociationField::new('garage', 'Nom');
+        yield AssociationField::new('garage', 'Nom')->hideOnIndex();
         yield TextField::new('day', 'Jour');
         yield BooleanField::new('close', 'Fermé la journée ?')->hideOnIndex();
         yield BooleanField::new('closedAtLunchtime', 'Fermé le midi ?')->hideOnIndex();

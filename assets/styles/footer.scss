@@ -32,6 +32,10 @@ footer, .container-infos-footer{
     transform: translateX(-50%);
 }
 
+.jours-ouvertures p:first-child {
+    width: 30px;
+}
+
 .acces-rapide {
     display: none;
 }
@@ -46,8 +50,11 @@ footer, .container-infos-footer{
 
 @media screen and (min-width: 1200px) {
 
+    .container-infos-footer {
+        width: 95%;
+    }
+
     .logo-et-reseaux {
-        margin-left: 40px;
         margin-right: 10%;
     }
 
