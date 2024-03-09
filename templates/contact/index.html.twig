@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ContactController!
+{% block title %}Contact
 {% endblock %}
 
 {% block body %}
@@ -11,34 +11,36 @@
 			<p class="my-5">Veuillez remplir le formulaire ci-dessous pour nous contacter si vous avez des questions et nous prendrons contact avec vous dans les plus brefs délais.</p>
 		</div>
 		<div class="contact-form col-10 mx-auto mb-5">
-			<div id="contact">
-                <div class="d-flex flex-column flex-xl-row justify-content-between gap-4 mb-4">
-                    <div class="form-group w-100">
-                        {{ form_label(form.name, 'Nom', {'label_attr': {'class': 'required form-label'}}) }}
-                        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                    <div class="form-group w-100">
-                        {{ form_label(form.surname, 'Prénom', {'label_attr': {'class': 'required form-label'}}) }}
-                        {{ form_widget(form.surname, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                </div>
-				<div class="form-group mb-4">
-					{{ form_label(form.subject, 'Sujet', {'label_attr': {'class': 'required form-label'}}) }}
-					{{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+			<form name="contact" method="post">
+				<div id="contact">
+					<div class="d-flex flex-column flex-xl-row justify-content-between gap-4 mb-4">
+						<div class="form-group w-100">
+							{{ form_label(form.name, 'Nom', {'label_attr': {'class': 'required form-label'}}) }}
+							{{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+						</div>
+						<div class="form-group w-100">
+							{{ form_label(form.surname, 'Prénom', {'label_attr': {'class': 'required form-label'}}) }}
+							{{ form_widget(form.surname, {'attr': {'class': 'form-control'}}) }}
+						</div>
+					</div>
+					<div class="form-group mb-4">
+						{{ form_label(form.subject, 'Sujet', {'label_attr': {'class': 'required form-label'}}) }}
+						{{ form_widget(form.subject, {'attr': {'class': 'form-control'}}) }}
+					</div>
+					<div class="form-group mb-4">
+						{{ form_label(form.email, 'Email', {'label_attr': {'class': 'required form-label'}}) }}
+						{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+					</div>
+					<div class="form-group mb-4">
+						{{ form_label(form.message, 'Message', {'label_attr': {'class': 'required form-label'}}) }}
+						{{ form_widget(form.message, {'attr': {'class': 'form-control', 'rows': 5}}) }}
+					</div>
+					<div class="form-group">
+						<button type="submit" id="contact_Envoyer" name="contact[Envoyer]" class="btn-primary btn">Envoyer</button>
+					</div>
+					<input type="hidden" id="contact__token" name="contact[_token]" value="{{ csrf_token('contact') }}">
 				</div>
-				<div class="form-group mb-4">
-					{{ form_label(form.email, 'Email', {'label_attr': {'class': 'required form-label'}}) }}
-					{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-				</div>
-				<div class="form-group mb-4">
-					{{ form_label(form.message, 'Message', {'label_attr': {'class': 'required form-label'}}) }}
-					{{ form_widget(form.message, {'attr': {'class': 'form-control', 'rows': 5}}) }}
-				</div>
-				<div class="form-group">
-					<button type="submit" id="contact_Envoyer" name="contact[Envoyer]" class="btn-primary btn">Envoyer</button>
-				</div>
-                {{ form_errors(form) }}
-			</div>
+			</form>
 		</div>
 	</div>
 
