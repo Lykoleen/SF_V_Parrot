@@ -10,7 +10,7 @@
 			<div class="col-10 mx-auto">
 				<p class="lead mb-5">Que vous recherchiez des services d'entretien, de réparation, ou que vous souhaitiez acheter une voiture d’occasion, vous êtes au bon endroit !</p>
 				<div class="d-flex justify-content-center">
-					<button type="button" class="btn btn-primary btn-all-annonces">Voir les annonces</button>
+					<a href="annonces" class="btn-all-annonces">Voir les annonces</a>
 				</div>
 			</div>
 		</div>
@@ -63,19 +63,15 @@
 							</div>
 						</div>
 						<div class="d-flex justify-content-center">
-							<a href="/annonces/lire/{{ vehicle.id }}">
-								<div class="d-flex justify-content-center">
-									<button type="button" class="btn btn-primary btn-annonce">Voir</button>
-								</div>
-							</a>
+							<a href="/annonces/{{ vehicle.id }}" class="btn-annonce">Voir</a>
 						</div>
 					</div>
 				</div>
 				{% set countVehicle = countVehicle + 1 %}
 			{% endfor %}
 		</div>
-		<div class="d-flex justify-content-center">
-			<button type="button" class="btn btn-primary btn-all-annonces">Toutes les annonces</button>
+		<div class="d-flex text-center justify-content-center">
+			<a href="annonces" class="btn-all-annonces">Toutes les annonces</a>
 		</div>
 	</div>
 	<div class="section-testimonials col-10 col-md-8 col-xxl-6 my-5 mx-auto">

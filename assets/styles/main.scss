@@ -59,13 +59,15 @@ h2 {
 .btn-all-annonces {
     width: 200px;
     height: 40px;
+    color: #000000;
     margin: 100px 0 0 0;
-    padding: 0;
+    padding-top: 4px;
     background-color: #fff !important;
     border-radius: 6px;
     border: $primary 2px solid !important;
     font-size: 18px;
     font-weight: bold !important;
+    text-decoration: none;
 }
 
 .mercedes {
