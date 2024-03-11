@@ -1,0 +1,37 @@
+@import "custom";
+
+.carousel-annonce {
+    border: 2px solid gray;
+    border-radius: 40px;
+    overflow: hidden;
+}
+
+.details-annonce {
+    border: 1px solid gray;
+    border-radius: 40px;
+    background-color: #EEF1F4;
+}
+
+.description-annonce {
+    max-height: 400px;
+    width: 80%;
+    margin: 20px auto;
+    overflow: scroll;
+    scrollbar-width: none;
+}
+
+.price-annonce {
+    margin: auto;
+    padding-top: 6px;
+    height: 60px;
+    margin-top: 10px;
+    width: 80%;
+    border-top: 1px solid $primary;
+}
+
+@media screen and (min-width: 1200px) {
+    .container-annonce{
+        height: 500px;
+    }
+    
+}

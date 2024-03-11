@@ -1,0 +1,15 @@
+{# ALERTE SUCCÈS #}
+{% set successMessages = app.flashes('success') %}
+{% if successMessages|length > 0 %}
+<div class="alert alert-success mt-5 text-center" role="alert">
+    {{ successMessages[0] }}
+</div>
+{% endif %}
+
+{# ALERTE ERREUR #}
+{% set errorMessages = app.flashes('error') %}
+{% if errorMessages|length > 0 %}
+<div class="alert alert-danger mt-5 text-center" role="alert">
+    {{ errorMessages[0] }}
+</div>
+{% endif %}

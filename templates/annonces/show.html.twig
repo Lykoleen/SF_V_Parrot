@@ -1,1 +1,90 @@
-<h1>Hello {{ annonce.title }}</h1>
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ annonce.brands.name }}
+	{{ annonce.models.name }}
+	{{ annonce.title }}
+{% endblock %}
+
+
+{% block body %}
+
+	<div class="section-show-vehicule mx-4 my-5">
+		<h1 class="text-center">
+			{{ annonce.brands.name }}
+			{{ annonce.models.name }}
+			{{ annonce.title }}
+		</h1>
+		<div class="container-annonce d-flex flex-column flex-xl-row justify-content-around col-10 gap-5 my-5 mx-auto">
+			<div id="carouselExampleControls" class="carousel carousel-dark carousel-annonce slide d-flex col-12 col-xl-6 col-xxl-5 pointer-event" data-bs-ride="carousel">
+				<div class="carousel-inner align-self-center w-75 mx-auto">
+					{% set isFirstItem = true %}
+					{% for picture in annonce.pictures %}
+						<div class="carousel-item {% if isFirstItem %}active{% endif %}">
+							<img src="../images/product/{{ picture.name }}" class="d-block w-100" alt="Image d'une {{ annonce.brands.name }} {{ annonce.models.name }} {{ annonce.title }}">
+						</div>
+						{% set isFirstItem = false %}
+					{% endfor %}
+				</div>
+				<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Previous</span>
+				</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+					<span class="carousel-control-next-icon" aria-hidden="true"></span>
+					<span class="visually-hidden">Next</span>
+				</button>
+			</div>
+			<div class="details-annonce col-12 col-xl-6 col-xxl-5 fs-5">
+				<div class="description-annonce">
+					{{  annonce.brands.name ~ ' ' ~ annonce.models.name ~ ' ' ~ annonce.title }} <br>
+					Année: {{ annonce.years }} <br>
+					Kilométrage: {{ annonce.mileage }} kms <br>
+					Type de boîte: {{ annonce.gearboxes.name }} <br>
+					Carburant: {{ annonce.energies.name }} <br><br>
+					Options: <br>
+					{{ annonce.description|nl2br }}
+				</div>
+				<div class="price-annonce fs-4 fw-bold">{{ annonce.price }} €</div>
+			</div>
+
+		</div>
+		<div class="contact-form col-10 col-lg-8 col-xxl-6 mx-auto mb-5">
+			<form name="contact" method="post">
+				<div id="contact">
+					<div class="text-center my-4">
+						<h3>Une question sur ce modèle ?</h3>
+					</div>
+					{% include "partials/_alertMessage.html.twig" %}
+					<div class="d-flex flex-column flex-xl-row justify-content-between gap-4 mb-4">
+						<div class="form-group w-100">
+							{{ form_label(form.name, 'Nom', {'label_attr': {'class': 'required form-label'}}) }}
+							{{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+						</div>
+						<div class="form-group w-100">
+							{{ form_label(form.surname, 'Prénom', {'label_attr': {'class': 'required form-label'}}) }}
+							{{ form_widget(form.surname, {'attr': {'class': 'form-control'}}) }}
+						</div>
+					</div>
+					<div class="form-group mb-4">
+						{{ form_label(form.subject, 'Sujet', {'label_attr': {'class': 'required form-label'}}) }}
+						{{ form_widget(form.subject, {'attr': {'class': 'form-control', 'value': annonce.brands.name ~ ' ' ~ annonce.models.name ~ ' ' ~ annonce.title ~ ' à ' ~ annonce.price ~ ' €'}}) }}
+					</div>
+					<div class="form-group mb-4">
+						{{ form_label(form.email, 'Email', {'label_attr': {'class': 'required form-label'}}) }}
+						{{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+					</div>
+					<div class="form-group mb-4">
+						{{ form_label(form.message, 'Message', {'label_attr': {'class': 'required form-label'}}) }}
+						{{ form_widget(form.message, {'attr': {'class': 'form-control', 'rows': 5}}) }}
+					</div>
+					<div class="form-group">
+						<button type="submit" id="contact_Envoyer" name="contact[Envoyer]" class="btn-primary btn">Envoyer</button>
+					</div>
+					<input type="hidden" id="contact__token" name="contact[_token]" value="{{ csrf_token('contact') }}">
+				</div>
+			</form>
+			<div class="space my-5 text-white" height="50">empty</div>
+		</div>
+
+	{% endblock %}

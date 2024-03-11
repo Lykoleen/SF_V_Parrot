@@ -77,7 +77,6 @@ class MainController extends AbstractController
             $this->manager->persist($testimonialsInstance);
             $this->manager->flush();
 
-            return $this->redirectToRoute('accueil');
         }
         return $this->render('main/index.html.twig', compact(
             "services",
