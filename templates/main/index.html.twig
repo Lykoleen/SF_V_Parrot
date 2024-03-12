@@ -18,7 +18,7 @@
 	</div>
 	<div id="section-services" class="section-services py-5">
 		<h2>NOS SERVICES</h2>
-		<div class="col-12 col-lg-10 row row-cols-1 row-cols-md-2 row-cols-lg-3 mx-auto g-5">
+		<div class="col-10 row row-cols-1 row-cols-lg-2 row-cols-xl-3 mx-auto g-5">
 			{% set countService = 0 %}
 			{% for service in services %}
 				<div class="col">
@@ -37,7 +37,7 @@
 	</div>
 	<div class="section-vehicles py-5">
 		<h2>NOS VÉHICULES D’OCCASION</h2>
-		<div class="col-12 col-lg-10 row row-cols-1 row-cols-md-2 row-cols-lg-3 mx-auto g-5">
+		<div class="col-10 row row-cols-1 row-cols-lg-2 row-cols-xl-3 mx-auto g-5">
 			{% set countVehicle = 0 %}
 			{% for vehicle in vehicles %}
 				<div class="col">
@@ -92,7 +92,9 @@
 										{{ avis1.surname }}
 										{{ avis1.name }}
 									</h3>
-									{{ avis1.message|raw }}
+									<div class="d-flex align-items-center">
+										{{ avis1.message|raw }}
+									</div>
 								</div>
 								{% if avis2 %}
 									<div class="container-avis-2">

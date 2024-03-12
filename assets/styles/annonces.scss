@@ -1,5 +1,32 @@
 @import "custom";
 
+/* Page Annonces */
+
+.annonce-card {
+    border: 2px solid black !important;
+    border-radius: 10px !important;
+}
+
+.card-annonce-title {
+    font-size: 1.2rem;
+}
+
+.footer-card-annonce {
+    height: 60px;
+}
+
+.footer-card-annonce a {
+    width: 100px;
+    height: 40px;
+    padding-top: 8px;
+    text-decoration: none;
+    color: white;
+    background-color: $secondary;
+    border-radius: 4px;
+}
+
+/* Page Show */
+
 .carousel-annonce {
     border: 2px solid gray;
     border-radius: 40px;
@@ -30,6 +57,9 @@
 }
 
 @media screen and (min-width: 1200px) {
+
+    /* Page Show */
+
     .container-annonce{
         height: 500px;
     }
