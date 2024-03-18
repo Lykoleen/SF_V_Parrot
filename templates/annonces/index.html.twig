@@ -23,8 +23,8 @@
                                 {{ annonce.brands.name }}
 								{{ annonce.models.name }}
 								{{ annonce.title }}</h3>
-                                <img src="images/product/{{imageAnnonce}}" alt="">
-                                <div class="footer-card-annonce d-flex justify-content-between align-items-center w-75 mx-auto">
+                                <img class="my-3" src="images/product/{{imageAnnonce}}" alt="">
+                                <div class="footer-card-annonce d-flex justify-content-between align-items-start w-75 mx-auto">
                                     <span class="fs-5 fw-bold text-dark">{{ annonce.price }} €</span>
                                     <a href="{{ path('annonces_show', {'id': annonce.id}) }}" class="text-center">Détails</a>
                                 </div>
