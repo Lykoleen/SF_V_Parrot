@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\Type\ContactType;
 use App\Repository\VehicleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,10 +17,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class AnnoncesController extends AbstractController
 {
     #[Route('/annonces', name: 'annonces')]
-    public function index(VehicleRepository $vehicleRepository): Response
+    public function index(VehicleRepository $vehicleRepository, Request $request): Response
     {
         $annonces = $vehicleRepository->findAll();
        
+        if ($request->isXmlHttpRequest()) {
+            return new JsonResponse([
+                'content' => $this->renderView('annonces/_annonces.html.twig', compact('annonces'))
+            ]);
+        }
 
         return $this->render('annonces/index.html.twig', compact(
             'annonces',

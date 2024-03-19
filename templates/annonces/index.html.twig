@@ -9,29 +9,12 @@
             <h1>Nos véhicules d'occasion</h1>
             <p>Pour une recherche personnalisée de votre véhicule, aidez vous des filtres ci-dessous.</p>
         </div>
-        <div class="wrapper-filtres-annonces col-12 d-flex flex-column flex-lg-row mx-auto py-5">
-            <div class="filtres col-12 col-lg-4">
+        <div class="wrapper-filtres-annonces col-12 d-flex flex-column flex-lg-row mx-auto py-5 js-filter">
+            <div class="filtres col-12 col-lg-4 js-filter-form">
                 <p>ici se trouvera les filtres</p>
             </div>
-            <div class="annonces col-10 col-lg-8 row row-cols-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-3 mx-auto g-3 g-lg-4">
-                {% for annonce in annonces %}
-                    <div class="col mb-3">
-                        <div class="card annonce-card">
-                            <div class="card-body d-flex flex-column justify-content-around p-0">
-                            {% set imageAnnonce = annonce.pictures.first.name %}
-                                <h3 class="card-title card-annonce-title text-center pt-4">
-                                {{ annonce.brands.name }}
-								{{ annonce.models.name }}
-								{{ annonce.title }}</h3>
-                                <img class="my-3" src="images/product/{{imageAnnonce}}" alt="">
-                                <div class="footer-card-annonce d-flex justify-content-between align-items-start w-75 mx-auto">
-                                    <span class="fs-5 fw-bold text-dark">{{ annonce.price }} €</span>
-                                    <a href="{{ path('annonces_show', {'id': annonce.id}) }}" class="text-center">Détails</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
+            <div class="annonces col-10 col-lg-8 row row-cols-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-3 mx-auto g-3 g-lg-4 js-filter-content">
+                {% include "annonces/_annonces.html.twig" %}
             </div>
         </div>
 

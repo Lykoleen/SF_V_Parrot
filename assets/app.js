@@ -18,6 +18,8 @@ require('bootstrap');
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 });
-import './styles/app.scss'
+import './styles/app.scss';
+import Filter from './js/Filter';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉')
+new Filter(document.querySelector('.js-filter'));
+
