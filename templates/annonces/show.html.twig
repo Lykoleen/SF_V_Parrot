@@ -45,7 +45,7 @@
 					Options: <br>
 					{{ annonce.description|nl2br }}
 				</div>
-				<div class="price-annonce fs-4 fw-bold">{{ annonce.price }} €</div>
+				<div class="price-annonce fs-4 fw-bold">{{ annonce.price|number_format(0, '.', ' ') }} €</div>
 			</div>
 
 		</div>

@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Form\Type\ContactType;
+use App\Repository\BrandRepository;
+use App\Repository\EnergyRepository;
+use App\Repository\ModelRepository;
 use App\Repository\VehicleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -17,18 +20,30 @@ use Symfony\Component\Routing\Annotation\Route;
 class AnnoncesController extends AbstractController
 {
     #[Route('/annonces', name: 'annonces')]
-    public function index(VehicleRepository $vehicleRepository, Request $request): Response
+    public function index(VehicleRepository $vehicleRepository, BrandRepository $brandRepository, ModelRepository $modelRepository, EnergyRepository $energyRepository, Request $request): Response
     {
-        $annonces = $vehicleRepository->findAll();
+        $filtersBrands = $request->get('brands');
+        $filtersModels = $request->get('models');
+        $filtersEnergies = $request->get('energies');
+        $annonces = $vehicleRepository->findByFilters($filtersBrands, $filtersModels, $filtersEnergies);
+        
        
-        if ($request->isXmlHttpRequest()) {
+        // Pour les filtres 
+        $brands = $brandRepository->findAll();
+        $models = $modelRepository->findAll();
+        $energies = $energyRepository->findAll();
+       
+        if ($request->get('ajax')) {
             return new JsonResponse([
-                'content' => $this->renderView('annonces/_annonces.html.twig', compact('annonces'))
+                'content' => $this->renderView('annonces/_annonces.html.twig', ['annonces' => $annonces])
             ]);
         }
 
         return $this->render('annonces/index.html.twig', compact(
             'annonces',
+            'brands',
+            'models',
+            'energies',
         ));
     }
 

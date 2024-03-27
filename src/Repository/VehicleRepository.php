@@ -22,6 +22,27 @@ class VehicleRepository extends ServiceEntityRepository
         parent::__construct($registry, Vehicle::class);
     }
 
+    public function findByFilters($filtersBrands = null, $filtersModels = null, $filtersEnergies = null)
+    {
+        $query = $this->createQueryBuilder('a');
+        
+        if($filtersBrands) {
+            $query->where('a.brands IN(:cats)')
+                ->setParameter(':cats', array_values($filtersBrands));
+        } 
+        if($filtersModels) {
+            $query->where('a.models IN(:cats)')
+                ->setParameter(':cats', array_values($filtersModels));
+        } 
+        if($filtersEnergies) {
+            $query->where('a.energies IN(:cats)')
+                ->setParameter(':cats', array_values($filtersEnergies));
+        }
+    
+        return $query->getQuery()
+                    ->getResult();
+    }
+
 //    /**
 //     * @return Vehicle[] Returns an array of Vehicle objects
 //     */

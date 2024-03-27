@@ -52,7 +52,7 @@
 								{{ nameModel }}
 								{{ vehicle.title }}</h3>
 							<div class="infos-supp-vehicle d-flex justify-content-between mx-auto">
-								<p class="card-text">{{ price }}
+								<p class="card-text">{{ price|number_format(0, '.', ' ') }}
 									€ |</p>
 								<p class="card-text">
 									{{ vehicle.years }}
@@ -92,7 +92,7 @@
 										{{ avis1.surname }}
 										{{ avis1.name }}
 									</h3>
-									<div class="d-flex align-items-center">
+									<div class="d-flex mt-5">
 										{{ avis1.message|raw }}
 									</div>
 								</div>
@@ -105,7 +105,9 @@
 											{{ avis2.surname }}
 											{{ avis2.name }}
 										</h3>
-										{{ avis2.message|raw }}
+										<div class="d-flex mt-5">
+											{{ avis2.message|raw }}
+										</div>
 									</div>
 								{% endif %}
 							</div>

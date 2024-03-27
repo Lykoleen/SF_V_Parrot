@@ -1,22 +1,82 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Annonces{% endblock %}
+{% block title %}Annonces
+{% endblock %}
+
+{# Récupération des paramètres de l'url #}
+{% set queryParams = app.request.query.all %}
 
 {% block body %}
 
-    <section class="section-annonces col-11 mx-auto mt-5">
-        <div class="intro-annonces text-center my-4 g-4">
-            <h1>Nos véhicules d'occasion</h1>
-            <p>Pour une recherche personnalisée de votre véhicule, aidez vous des filtres ci-dessous.</p>
-        </div>
-        <div class="wrapper-filtres-annonces col-12 d-flex flex-column flex-lg-row mx-auto py-5 js-filter">
-            <div class="filtres col-12 col-lg-4 js-filter-form">
-                <p>ici se trouvera les filtres</p>
-            </div>
-            <div class="annonces col-10 col-lg-8 row row-cols-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-3 mx-auto g-3 g-lg-4 js-filter-content">
-                {% include "annonces/_annonces.html.twig" %}
-            </div>
-        </div>
+	<section class="section-annonces col-11 mx-auto mt-5">
+		<div class="intro-annonces text-center my-4 g-4">
+			<h1>Nos véhicules d'occasion</h1>
+			<p>Pour une recherche personnalisée de votre véhicule, aidez vous des filtres ci-dessous.</p>
+		</div>
+		<div class="wrapper-filtres-annonces col-12 d-flex flex-column flex-lg-row mx-auto py-5 js-filter">
+			<div class="filtres d-flex flex-column align-items-center align-items-xl-start gap-3 col-12 col-lg-4 mb-5">
+				<p>ici se trouvera les filtres</p>
+				<button class="btn btn-primary w-50" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasLeft">Trier par Marque</button>
 
-    </section>
+				<div class="offcanvas offcanvas-start mt-5" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel">
+					<div class="offcanvas-header ms-3 mt-5">
+						<h5 id="offcanvasLeftLabel">Liste des catégories</h5>
+						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+					</div>
+					<div class="offcanvas-body ms-3">
+						<form class="js-filter-form">  
+                            {% for brand in brands %}
+								{# Vérifie si la l'id est présente dans queryParams #}
+								{% if queryParams is not empty and queryParams.brands is defined %}			
+									{% set checked = (brand.id in queryParams.brands) ? "checked" : "" %}
+								{% else %}
+									{% set checked = "" %}
+								{% endif %}
+								
+                                <p><input type="checkbox" name="brands[]" id="brand-{{brand.id}}" value="{{brand.id}}" {{checked}}>
+                                <label for="brand-{{brand.id}}">{{ brand.name }}</label></p>
+                            {% endfor %}
+                        </form>
+					</div>
+				</div>
+				<button class="btn btn-primary w-50" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeftModels" aria-controls="offcanvasLeftModels">Trier par Modèle</button>
+
+				<div class="offcanvas offcanvas-start mt-5" tabindex="-1" id="offcanvasLeftModels" aria-labelledby="offcanvasLeftLabelModels">
+					<div class="offcanvas-header ms-3 mt-5">
+						<h5 id="offcanvasLeftLabelModels">Liste des modèles</h5>
+						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+					</div>
+					<div class="offcanvas-body ms-3">
+						<form class="js-filter-form">  
+                            {% for model in models %}
+                                <p><input type="checkbox" name="models[]" id="model-{{model.id}}" value="{{model.id}}">
+                                <label for="model-{{model.id}}">{{ model.name }}</label></p>
+                            {% endfor %}
+                        </form>
+					</div>
+				</div>
+
+				<button class="btn btn-primary w-50" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeftEnergies" aria-controls="offcanvasLeftEnergies">Trier par Carburant</button>
+
+				<div class="offcanvas offcanvas-start mt-5" tabindex="-1" id="offcanvasLeftEnergies" aria-labelledby="offcanvasLeftLabelEnergies">
+					<div class="offcanvas-header ms-3 mt-5">
+						<h5 id="offcanvasLeftLabeEnergies">Liste des carburants</h5>
+						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+					</div>
+					<div class="offcanvas-body ms-3">
+						<form class="js-filter-form">  
+                            {% for energie in energies %}
+                                <p><input type="checkbox" name="energies[]" id="energie-{{energie.id}}" value="{{energie.id}}">
+                                <label for="energie-{{energie.id}}">{{ energie.name }}</label></p>
+                            {% endfor %}
+                        </form>
+					</div>
+				</div>
+			</div>
+			<div class="annonces col-10 col-lg-8 row row-cols-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-3 mx-auto g-3 g-lg-4 js-filter-content">
+				{% include "annonces/_annonces.html.twig" %}
+			</div>
+		</div>
+
+	</section>
 {% endblock %}
