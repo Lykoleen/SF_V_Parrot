@@ -26,31 +26,52 @@ class AnnoncesController extends AbstractController
         $filtersBrands = $request->get('brands');
         $filtersModels = $request->get('models');
         $filtersEnergies = $request->get('energies');
-        $filtersMinPrice = $request->get('min') !== null ? $request->get('min') : 0;
-        $filtersMaxPrice = $request->get('max') !== null ? $request->get('max') : 500000;        
-        $annonces = $vehicleRepository->findByFilters($filtersBrands, $filtersModels, $filtersEnergies, $filtersMinPrice, $filtersMaxPrice);
+        $filtersMinPrice = $request->get('minPrice') !== null ? $request->get('minPrice') : 0;
+        $filtersMaxPrice = $request->get('maxPrice') !== null ? $request->get('maxPrice') : 500000;
+        $filtersMinMileage = $request->get('minMileage') !== null ? $request->get('minMileage') : 0;
+        $filtersMaxMileage = $request->get('maxMileage') !== null ? $request->get('maxMileage') : 500000;
+        $filtersMinYears = $request->get('minYears') !== null ? $request->get('minYears') : 1900;  
+        $filtersMaxYears = $request->get('maxYears') !== null ? $request->get('maxYears') : 2200;
+        $annonces = $vehicleRepository->findByFilters($filtersBrands, $filtersModels, $filtersEnergies, $filtersMinPrice, $filtersMaxPrice, $filtersMinYears, $filtersMaxYears, $filtersMinMileage, $filtersMaxMileage);
 
         $minPrice = PHP_INT_MAX; // Initialisation du prix minimum à une valeur très grande
         $maxPrice = 0; // Initialisation du prix maximum à zéro
-        
+        $minYears = PHP_INT_MAX;
+        $maxYears = 0;
+        $minMileage = PHP_INT_MAX;
+        $maxMileage = 0;
+
         foreach ($annonces as $annonce) {
-            // Obtenez le prix de chaque annonce
-            
-            $prix = $annonce->getPrice();
         
-            // Mettez à jour le prix minimum si le prix actuel est inférieur au prix minimum actuel
+            $prix = $annonce->getPrice();
+            $years = $annonce->getYears();
+            $mileage = $annonce->getMileage();
+        
+            // Met à jour le prix minimum si le prix actuel est inférieur au prix minimum actuel
             if ($prix < $minPrice) {
                 $minPrice = $prix;
             }
         
-            // Mettez à jour le prix maximum si le prix actuel est supérieur au prix maximum actuel
+            // Met à jour le prix maximum si le prix actuel est supérieur au prix maximum actuel
             if ($prix > $maxPrice) {
                 $maxPrice = $prix;
             }
+
+            if ($years < $minYears) {
+                $minYears = $years;
+            }
+            if ($years > $maxYears) {
+                $maxYears = $years;
+            }
+
+            if ($mileage < $minMileage) {
+                $minMileage = $mileage;
+            }
+            if ($mileage > $maxMileage) {
+                $maxMileage = $mileage;
+            }
+
         }
-        
-        
-        // Maintenant, $minPrice contient le prix minimum et $maxPrice contient le prix maximum de toutes les annonces
         
         // Pour les filtres 
         $brands = $brandRepository->findAll();
@@ -73,6 +94,10 @@ class AnnoncesController extends AbstractController
             'energies',
             'minPrice',
             'maxPrice',
+            'minYears',
+            'maxYears',
+            'minMileage',
+            'maxMileage'
         ));
     }
 

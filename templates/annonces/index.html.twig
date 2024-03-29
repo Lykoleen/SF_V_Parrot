@@ -85,9 +85,21 @@
 				</div>
 				<p class="mt-4 mb-5">Trier par Prix</p>
 				<form class="js-filter-form w-50">
-					<input class="w-50" name="min[]" type="hidden" id="minPrice" value="{{minPrice}}">
-					<input class="w-50" name="max[]" type="hidden" id="maxPrice" value="{{maxPrice}}">	
+					<input class="w-50" name="minPrice[]" type="hidden" id="minPrice" value="{{minPrice}}">
+					<input class="w-50" name="maxPrice[]" type="hidden" id="maxPrice" value="{{maxPrice}}">	
 					<div class="ms-2" id="price-slider" data-min="{{minPrice}}" data-max="{{maxPrice}}"></div>
+				</form>
+				<p class="mt-4 mb-5">Trier par Année</p>
+				<form class="js-filter-form w-50">
+					<input class="w-50" name="minYears[]" type="hidden" id="minYears" value="{{minYears}}">
+					<input class="w-50" name="maxYears[]" type="hidden" id="maxYears" value="{{maxYears}}">	
+					<div class="ms-2" id="years-slider" data-min="{{minYears}}" data-max="{{maxYears}}"></div>
+				</form>
+				<p class="mt-4 mb-5">Trier par Kilométrage</p>
+				<form class="js-filter-form w-50">
+					<input class="w-50" name="minMileage[]" type="hidden" id="minMileage" value="{{minMileage}}">
+					<input class="w-50" name="maxMileage[]" type="hidden" id="maxMileage" value="{{maxMileage}}">	
+					<div class="ms-2" id="mileage-slider" data-min="{{minMileage}}" data-max="{{maxMileage}}"></div>
 				</form>
 			</div>
 			<div class="annonces col-10 col-lg-8 col-xxl-9 row row-cols-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-3 mx-auto g-3 g-lg-4 js-filter-content">

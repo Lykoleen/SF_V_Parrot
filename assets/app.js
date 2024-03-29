@@ -30,6 +30,8 @@ new Filter(document.querySelector('.js-filter'));
 // Filtre slider
 
 const priceSlider = document.getElementById('price-slider');
+const yearsSlider = document.getElementById('years-slider');
+const mileageSlider = document.getElementById('mileage-slider');
 
 if (priceSlider) {
     const min = document.getElementById('minPrice')
@@ -57,7 +59,65 @@ if (priceSlider) {
             max.value = Math.round(values[1])
             max.dispatchEvent(new Event('change'))
         }
-        console.log(minValue, maxValue);
+    })
+    
+}
+
+if (yearsSlider) {
+    const minYears = document.getElementById('minYears')
+    const maxYears = document.getElementById('maxYears')
+    const minValueYears = parseInt(yearsSlider.dataset.min, 10)
+    const maxValueYears = parseInt(yearsSlider.dataset.max, 10)
+
+    const range = noUiSlider.create(yearsSlider, {
+        start: [minYears.value || minValue, maxYears.value || maxValue],
+        connect: true,
+        range: {
+            'min': minValueYears,
+            'max': maxValueYears
+        },
+        step: 1,
+        tooltips: true,
+        
+    })
+    range.on('end', function (values, handle) {
+        if (handle === 0) {
+            minYears.value = Math.round(values[0])
+            minYears.dispatchEvent(new Event('change'))
+        }
+        if (handle === 1) {
+            maxYears.value = Math.round(values[1])
+            maxYears.dispatchEvent(new Event('change'))
+        }
+    })
+    
+}
+if (mileageSlider) {
+    const minMileage = document.getElementById('minMileage')
+    const maxMileage = document.getElementById('maxMileage')
+    const minValueMileage = parseInt(mileageSlider.dataset.min, 10)
+    const maxValueMileage = parseInt(mileageSlider.dataset.max, 10)
+
+    const range = noUiSlider.create(mileageSlider, {
+        start: [minMileage.value || minValue, maxMileage.value || maxValue],
+        connect: true,
+        range: {
+            'min': minValueMileage,
+            'max': maxValueMileage
+        },
+        step: 1000,
+        tooltips: true,
+        
+    })
+    range.on('end', function (values, handle) {
+        if (handle === 0) {
+            minMileage.value = Math.round(values[0])
+            minMileage.dispatchEvent(new Event('change'))
+        }
+        if (handle === 1) {
+            maxMileage.value = Math.round(values[1])
+            maxMileage.dispatchEvent(new Event('change'))
+        }
     })
     
 }
