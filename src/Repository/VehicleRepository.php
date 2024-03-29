@@ -22,22 +22,42 @@ class VehicleRepository extends ServiceEntityRepository
         parent::__construct($registry, Vehicle::class);
     }
 
-    public function findByFilters($filtersBrands = null, $filtersModels = null, $filtersEnergies = null)
+    public function findByFilters($filtersBrands = null, $filtersModels = null, $filtersEnergies = null, $filtersMinPrice = null, $filtersMaxPrice = null)
     {
         $query = $this->createQueryBuilder('a');
         
-        if($filtersBrands) {
-            $query->where('a.brands IN(:cats)')
-                ->setParameter(':cats', array_values($filtersBrands));
-        } 
-        if($filtersModels) {
-            $query->where('a.models IN(:cats)')
-                ->setParameter(':cats', array_values($filtersModels));
-        } 
-        if($filtersEnergies) {
-            $query->where('a.energies IN(:cats)')
-                ->setParameter(':cats', array_values($filtersEnergies));
-        }
+            $conditions = [];
+        
+            if($filtersBrands) {
+                $conditions[] = 'a.brands IN (:brands)';
+            }
+            if($filtersModels) {
+                $conditions[] = 'a.models IN (:models)';
+            }
+            if($filtersEnergies) {
+                $conditions[] = 'a.energies IN (:energies)';
+            }
+            if ($filtersMinPrice !== null && $filtersMaxPrice !== null) {
+                $conditions[] = 'a.price BETWEEN :minPrice AND :maxPrice';
+            }
+        
+            $query->andWhere(implode(' AND ', $conditions));
+        
+            if($filtersBrands) {
+                $query->setParameter(':brands', array_values($filtersBrands));
+            }
+            if($filtersModels) {
+                $query->setParameter(':models', array_values($filtersModels));
+            }
+            if($filtersEnergies) {
+                $query->setParameter(':energies', array_values($filtersEnergies));
+            }
+            if ($filtersMinPrice !== null && $filtersMaxPrice !== null) {
+                $query->setParameter(':minPrice', $filtersMinPrice);
+                $query->setParameter(':maxPrice', $filtersMaxPrice);
+            }
+    
+        
     
         return $query->getQuery()
                     ->getResult();

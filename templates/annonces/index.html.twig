@@ -14,8 +14,7 @@
 			<p>Pour une recherche personnalisée de votre véhicule, aidez vous des filtres ci-dessous.</p>
 		</div>
 		<div class="wrapper-filtres-annonces col-12 d-flex flex-column flex-lg-row mx-auto py-5 js-filter">
-			<div class="filtres d-flex flex-column align-items-center align-items-xl-start gap-3 col-12 col-lg-4 mb-5">
-				<p>ici se trouvera les filtres</p>
+			<div class="filtres d-flex flex-column align-items-center gap-3 col-12 col-lg-4 col-xxl-3 mb-5">
 				<button class="btn btn-primary w-50" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasLeft">Trier par Marque</button>
 
 				<div class="offcanvas offcanvas-start mt-5" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel">
@@ -49,7 +48,13 @@
 					<div class="offcanvas-body ms-3">
 						<form class="js-filter-form">  
                             {% for model in models %}
-                                <p><input type="checkbox" name="models[]" id="model-{{model.id}}" value="{{model.id}}">
+								{% if queryParams is not empty and queryParams.models is defined %}			
+									{% set checked = (model.id in queryParams.models) ? "checked" : "" %}
+								{% else %}
+									{% set checked = "" %}
+								{% endif %}
+
+                                <p><input type="checkbox" name="models[]" id="model-{{model.id}}" value="{{model.id}}"  {{checked}}>
                                 <label for="model-{{model.id}}">{{ model.name }}</label></p>
                             {% endfor %}
                         </form>
@@ -66,14 +71,26 @@
 					<div class="offcanvas-body ms-3">
 						<form class="js-filter-form">  
                             {% for energie in energies %}
-                                <p><input type="checkbox" name="energies[]" id="energie-{{energie.id}}" value="{{energie.id}}">
+								{% if queryParams is not empty and queryParams.energies is defined %}			
+									{% set checked = (energie.id in queryParams.energies) ? "checked" : "" %}
+								{% else %}
+									{% set checked = "" %}
+								{% endif %}
+
+                                <p><input type="checkbox" name="energies[]" id="energie-{{energie.id}}" value="{{energie.id}}"  {{checked}}>
                                 <label for="energie-{{energie.id}}">{{ energie.name }}</label></p>
                             {% endfor %}
                         </form>
 					</div>
 				</div>
+				<p class="mt-4 mb-5">Trier par Prix</p>
+				<form class="js-filter-form w-50">
+					<input class="w-50" name="min[]" type="hidden" id="minPrice" value="{{minPrice}}">
+					<input class="w-50" name="max[]" type="hidden" id="maxPrice" value="{{maxPrice}}">	
+					<div class="ms-2" id="price-slider" data-min="{{minPrice}}" data-max="{{maxPrice}}"></div>
+				</form>
 			</div>
-			<div class="annonces col-10 col-lg-8 row row-cols-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-3 mx-auto g-3 g-lg-4 js-filter-content">
+			<div class="annonces col-10 col-lg-8 col-xxl-9 row row-cols-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-3 mx-auto g-3 g-lg-4 js-filter-content">
 				{% include "annonces/_annonces.html.twig" %}
 			</div>
 		</div>

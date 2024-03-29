@@ -1,4 +1,3 @@
-import { param } from "jquery"
 
 /**
  * @property {HTMLFormElement} forms
@@ -25,7 +24,7 @@ export default class Filter {
      */
     bindEvents () {
         this.forms.forEach(form => {
-            form.querySelectorAll('input[type=checkbox]').forEach(input => {
+            form.querySelectorAll('input').forEach(input => {
                 input.addEventListener('change', this.loadForm.bind(this))
             })
         })

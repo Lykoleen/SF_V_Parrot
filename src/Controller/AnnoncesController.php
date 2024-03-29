@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Vehicle;
 use App\Form\Type\ContactType;
 use App\Repository\BrandRepository;
 use App\Repository\EnergyRepository;
@@ -25,17 +26,43 @@ class AnnoncesController extends AbstractController
         $filtersBrands = $request->get('brands');
         $filtersModels = $request->get('models');
         $filtersEnergies = $request->get('energies');
-        $annonces = $vehicleRepository->findByFilters($filtersBrands, $filtersModels, $filtersEnergies);
+        $filtersMinPrice = $request->get('min') !== null ? $request->get('min') : 0;
+        $filtersMaxPrice = $request->get('max') !== null ? $request->get('max') : 500000;        
+        $annonces = $vehicleRepository->findByFilters($filtersBrands, $filtersModels, $filtersEnergies, $filtersMinPrice, $filtersMaxPrice);
+
+        $minPrice = PHP_INT_MAX; // Initialisation du prix minimum à une valeur très grande
+        $maxPrice = 0; // Initialisation du prix maximum à zéro
         
-       
+        foreach ($annonces as $annonce) {
+            // Obtenez le prix de chaque annonce
+            
+            $prix = $annonce->getPrice();
+        
+            // Mettez à jour le prix minimum si le prix actuel est inférieur au prix minimum actuel
+            if ($prix < $minPrice) {
+                $minPrice = $prix;
+            }
+        
+            // Mettez à jour le prix maximum si le prix actuel est supérieur au prix maximum actuel
+            if ($prix > $maxPrice) {
+                $maxPrice = $prix;
+            }
+        }
+        
+        
+        // Maintenant, $minPrice contient le prix minimum et $maxPrice contient le prix maximum de toutes les annonces
+        
         // Pour les filtres 
         $brands = $brandRepository->findAll();
         $models = $modelRepository->findAll();
         $energies = $energyRepository->findAll();
        
         if ($request->get('ajax')) {
+
             return new JsonResponse([
-                'content' => $this->renderView('annonces/_annonces.html.twig', ['annonces' => $annonces])
+                'content' => $this->renderView('annonces/_annonces.html.twig', compact(
+                    'annonces',
+                ))
             ]);
         }
 
@@ -44,6 +71,8 @@ class AnnoncesController extends AbstractController
             'brands',
             'models',
             'energies',
+            'minPrice',
+            'maxPrice',
         ));
     }
 
