@@ -1,5 +1,5 @@
 {% for annonce in annonces %}
-	<div class="col mb-3">
+	<div class="col mb-3" id="annonce-{{ annonce.id }}">
 		<div class="card annonce-card">
 			<div class="card-body d-flex flex-column justify-content-around p-0">
 				{% set imageAnnonce = annonce.pictures.first.name %}

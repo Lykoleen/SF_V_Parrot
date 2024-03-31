@@ -18,11 +18,11 @@
 				<button class="btn btn-primary w-50" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeft" aria-controls="offcanvasLeft">Trier par Marque</button>
 
 				<div class="offcanvas offcanvas-start mt-5" tabindex="-1" id="offcanvasLeft" aria-labelledby="offcanvasLeftLabel">
-					<div class="offcanvas-header ms-3 mt-5">
+					<div class="offcanvas-header ms-5 mt-5">
 						<h5 id="offcanvasLeftLabel">Liste des catégories</h5>
 						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 					</div>
-					<div class="offcanvas-body ms-3">
+					<div class="offcanvas-body ms-5">
 						<form class="js-filter-form">  
                             {% for brand in brands %}
 								{# Vérifie si la l'id est présente dans queryParams #}
@@ -33,7 +33,7 @@
 								{% endif %}
 								
                                 <p><input type="checkbox" name="brands[]" id="brand-{{brand.id}}" value="{{brand.id}}" {{checked}}>
-                                <label for="brand-{{brand.id}}">{{ brand.name }}</label></p>
+                                <label class="ms-2" for="brand-{{brand.id}}">{{ brand.name }}</label></p>
                             {% endfor %}
                         </form>
 					</div>
@@ -45,30 +45,19 @@
 						<h5 id="offcanvasLeftLabelModels">Liste des modèles</h5>
 						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 					</div>
-					<div class="offcanvas-body ms-3">
-						<form class="js-filter-form">  
-                            {% for model in models %}
-								{% if queryParams is not empty and queryParams.models is defined %}			
-									{% set checked = (model.id in queryParams.models) ? "checked" : "" %}
-								{% else %}
-									{% set checked = "" %}
-								{% endif %}
-
-                                <p><input type="checkbox" name="models[]" id="model-{{model.id}}" value="{{model.id}}"  {{checked}}>
-                                <label for="model-{{model.id}}">{{ model.name }}</label></p>
-                            {% endfor %}
-                        </form>
+					<div class="offcanvas-body ms-5">
+						{% include "annonces/_modelsFilter.html.twig" %}
 					</div>
 				</div>
 
 				<button class="btn btn-primary w-50" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeftEnergies" aria-controls="offcanvasLeftEnergies">Trier par Carburant</button>
 
 				<div class="offcanvas offcanvas-start mt-5" tabindex="-1" id="offcanvasLeftEnergies" aria-labelledby="offcanvasLeftLabelEnergies">
-					<div class="offcanvas-header ms-3 mt-5">
+					<div class="offcanvas-header ms-5 mt-5">
 						<h5 id="offcanvasLeftLabeEnergies">Liste des carburants</h5>
 						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 					</div>
-					<div class="offcanvas-body ms-3">
+					<div class="offcanvas-body ms-5">
 						<form class="js-filter-form">  
                             {% for energie in energies %}
 								{% if queryParams is not empty and queryParams.energies is defined %}			
@@ -78,7 +67,7 @@
 								{% endif %}
 
                                 <p><input type="checkbox" name="energies[]" id="energie-{{energie.id}}" value="{{energie.id}}"  {{checked}}>
-                                <label for="energie-{{energie.id}}">{{ energie.name }}</label></p>
+                                <label class="ms-2" for="energie-{{energie.id}}">{{ energie.name }}</label></p>
                             {% endfor %}
                         </form>
 					</div>

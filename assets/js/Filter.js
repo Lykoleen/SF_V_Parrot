@@ -1,6 +1,8 @@
+import {Flipper} from 'flip-toolkit'
 
 /**
  * @property {HTMLFormElement} forms
+ * @property {HTMLFormElement} modelsFilters
  * @property {HTMLElement} content
  */
 export default class Filter {
@@ -15,6 +17,7 @@ export default class Filter {
             return
         }
         this.forms = element.querySelectorAll('.js-filter-form')
+        this.modelsFilters = element.querySelector('.models-filters')
         this.content = element.querySelector('.js-filter-content')
         this.bindEvents()
     }
@@ -28,6 +31,12 @@ export default class Filter {
                 input.addEventListener('change', this.loadForm.bind(this))
             })
         })
+        this.modelsFilters.addEventListener('change', (event) => {
+            const target = event.target;
+            if (target.tagName === 'INPUT') {
+                this.loadForm();
+            }
+        });
     }
     
     async loadForm () {
@@ -63,10 +72,49 @@ export default class Filter {
         })
         if (response.status >= 200 && response.status < 300) {
             const data = await response.json()
-            this.content.innerHTML = data.content
+            this.flipContent(data.content)
+            this.modelsFilters.innerHTML = data.modelsFilters
             history.replaceState({}, '', url)
         } else {
             console.error(response)
         }
     }
+
+    /**
+     * Remplace les éléments de la grille avec un effet d'animation flip
+     * @param {string} content 
+     */
+    async flipContent(content) {
+        const flipper = new Flipper({
+            element: this.content
+        });
+    
+        // Enregistrer l'état actuel avant la mise à jour
+        flipper.recordBeforeUpdate();
+    
+        // Mettre à jour le contenu en ajoutant les nouveaux éléments
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = content;
+        while (this.content.firstChild) {
+            this.content.removeChild(this.content.firstChild);
+        }
+        while (tempDiv.firstChild) {
+            this.content.appendChild(tempDiv.firstChild);
+        }
+    
+        // Sélectionner les nouveaux éléments ajoutés
+        const newElements = this.content.querySelectorAll('.col.mb-3');
+    
+        // Animer les nouveaux éléments avec Flipper
+        newElements.forEach(element => {
+            flipper.addFlipped({
+                element,
+                flipId: element.id
+            });
+        });
+    
+        // Mettre à jour Flipper pour appliquer les animations
+        flipper.update();
+    }
+    
 }

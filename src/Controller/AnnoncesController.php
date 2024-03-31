@@ -33,7 +33,7 @@ class AnnoncesController extends AbstractController
         $filtersMinYears = $request->get('minYears') !== null ? $request->get('minYears') : 1900;  
         $filtersMaxYears = $request->get('maxYears') !== null ? $request->get('maxYears') : 2200;
         $annonces = $vehicleRepository->findByFilters($filtersBrands, $filtersModels, $filtersEnergies, $filtersMinPrice, $filtersMaxPrice, $filtersMinYears, $filtersMaxYears, $filtersMinMileage, $filtersMaxMileage);
-
+        
         $minPrice = PHP_INT_MAX; // Initialisation du prix minimum à une valeur très grande
         $maxPrice = 0; // Initialisation du prix maximum à zéro
         $minYears = PHP_INT_MAX;
@@ -83,6 +83,9 @@ class AnnoncesController extends AbstractController
             return new JsonResponse([
                 'content' => $this->renderView('annonces/_annonces.html.twig', compact(
                     'annonces',
+                )),
+                'modelsFilters' => $this->renderView('annonces/_modelsFilter.html.twig', compact(
+                    'annonces'
                 ))
             ]);
         }

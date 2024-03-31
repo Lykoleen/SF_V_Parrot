@@ -71,7 +71,7 @@ class VehicleRepository extends ServiceEntityRepository
                 $query->setParameter(':maxMileage', $filtersMaxMileage);
             }
     
-        
+        $query->orderBy('a.brands', 'ASC');
     
         return $query->getQuery()
                     ->getResult();

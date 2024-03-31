@@ -1,0 +1,31 @@
+{% set queryParams = app.request.query.all %}
+
+
+<form class="js-filter-form models-filters">
+	{% set marquePrecedente = '' %}
+	{% set marques = [] %}
+
+	{% for annonce in annonces %}
+		{% set marque = annonce.brands.name %}
+
+		{% if marque != marquePrecedente %}
+			{% if marquePrecedente != '' %}
+			</p>
+		{% endif %}
+		<p class="fw-bold">{{ marque }}
+			:</p>
+		{% set marquePrecedente = marque %}
+	{% endif %}
+	{% if queryParams is not empty and queryParams.models is defined %}
+		{% set checked = (annonce.models.id in queryParams.models) ? "checked" : "" %}
+	{% else %}
+		{% set checked = "" %}
+	{% endif %}
+
+	{% set marques = marques|merge([marque]) %}
+
+	<p class="ms-5 my-2">
+		<input type="checkbox" name="models[]" id="model-{{ annonce.models.id }}" value="{{ annonce.models.id }}" {{checked}}>
+		<label class="ms-2" for="model-{{ annonce.models.id }}">{{ annonce.models.name }}</label>
+	</p>
+{% endfor %}</form>
