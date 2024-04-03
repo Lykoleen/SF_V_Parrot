@@ -1,4 +1,18 @@
 
+/* Stylisation des pages mentions légales et politique de confidentialité */
+
+.mentions, .politique {
+    background-color: black;
+    color: white;
+    box-shadow: 0 50px black;
+}
+
+.mentions h1, .politique h1 {
+    color: $primary;
+}
+
+/* Fin de Stylisation des pages mentions légales et politique de confidentialité */
+
 .container-infos-footer {
     position: relative;
     max-width: 1500px;
@@ -49,6 +63,16 @@ footer, .container-infos-footer{
 }
 
 @media screen and (min-width: 1200px) {
+
+    /* Style mentions et politique */
+
+    .mentions-row, .politique-row {
+        box-shadow: 1px 1px 5px inset $primary;
+    }
+
+    /* Fin Style mentions et politique */
+
+    .mentions-row
 
     .container-infos-footer {
         width: 95%;
