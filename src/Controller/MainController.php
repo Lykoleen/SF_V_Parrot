@@ -31,35 +31,10 @@ class MainController extends AbstractController
     public function index(PictureRepository $pictureRepository, ProductRepository $productRepository, ServiceRepository $serviceRepository, VehicleRepository $vehicleRepository, TestimonialRepository $testimonialRepository, Request $request): Response
     {
         // Récupération des données nécessaires à la vue Main.
-        // Gestion des services
 
         $services = $serviceRepository->findAll();
-
-        // Récupération des images
-        $imagesServices = [];
-        foreach ($services as $service) {
-            $serviceImage = $pictureRepository->findOneByServiceId($service->getId());
-            $image = $serviceImage->getName();
-            $imagesServices[] = $image;
-        }
-
-        //Gestion des annonces de voitures
         $vehicles = $vehicleRepository->findBy3();
-        $pictureInstance = new Picture;
-        
-        $imagesVehicles = [];
-        $nameBrands = [];
-        $nameModels = [];
-        $prices = [];
-        foreach ($vehicles as $vehicle) {
-            $annonceImages = $pictureRepository->findOneByProductId($vehicle->getId());
-            $nameBrands[] = $vehicle->getBrands()->getName();
-            $nameModels[] = $vehicle->getModels()->getName();
-            $prices[] = $vehicle->getPrice();
-            foreach ($annonceImages as $image) {
-                $imagesVehicles[] = $image->getName();
-            }
-        }
+
 
         // Gestion des testimonials
         $testimonials = $testimonialRepository->findByValidated(1);
@@ -80,11 +55,6 @@ class MainController extends AbstractController
         }
         return $this->render('main/index.html.twig', compact(
             "services",
-            "imagesServices",
-            "imagesVehicles",
-            "nameBrands",
-            "nameModels",
-            "prices",
             "vehicles",
             "testimonials",
             "form"

@@ -23,8 +23,7 @@
 			{% for service in services %}
 				<div class="col">
 					<div class="card card-service">
-						{% set imageService = imagesServices[countService] %}
-						<img src="images/product/{{imageService}}" class="card-img-top" alt="affiche service {{ service.title }}">
+						<img src="images/product/{{service.pictures.first.name}}" class="card-img-top" alt="affiche service {{ service.title }}">
 						<div class="card-body text-center">
 							<h3 class="card-title card-title-service">{{ service.title }}</h3>
 							<p class="card-text">{{ service.description|raw }}</p>
@@ -38,21 +37,16 @@
 	<div class="section-vehicles py-5">
 		<h2>NOS VÉHICULES D’OCCASION</h2>
 		<div class="col-10 row row-cols-1 row-cols-lg-2 row-cols-xl-3 mx-auto g-5">
-			{% set countVehicle = 0 %}
 			{% for vehicle in vehicles %}
 				<div class="col">
 					<div class="card card-annonce">
-						{% set imageVehicle = imagesVehicles[countVehicle] %}
-						{% set nameBrand = nameBrands[countVehicle] %}
-						{% set nameModel = nameModels[countVehicle] %}
-						{% set price = prices[countVehicle] %}
-						<img src="images/product/{{imageVehicle}}" class="card-img-top" alt="affiche véhicule {{ nameBrand ~ nameModel ~ vehicle.title }}">
+						<img src="images/product/{{vehicle.pictures.first.name}}" class="card-img-top" alt="affiche véhicule {{ vehicle.brands.name ~ vehicle.models.name ~ vehicle.title }}">
 						<div class="card-body text-center">
-							<h3 class="card-title card-title-annonce">{{ nameBrand }}
-								{{ nameModel }}
+							<h3 class="card-title card-title-annonce">{{ vehicle.brands.name }}
+								{{ vehicle.models.name }}
 								{{ vehicle.title }}</h3>
 							<div class="infos-supp-vehicle d-flex justify-content-between mx-auto">
-								<p class="card-text">{{ price|number_format(0, '.', ' ') }}
+								<p class="card-text">{{ vehicle.price|number_format(0, '.', ' ') }}
 									€ |</p>
 								<p class="card-text">
 									{{ vehicle.years }}
@@ -67,7 +61,6 @@
 						</div>
 					</div>
 				</div>
-				{% set countVehicle = countVehicle + 1 %}
 			{% endfor %}
 		</div>
 		<div class="d-flex text-center justify-content-center">
