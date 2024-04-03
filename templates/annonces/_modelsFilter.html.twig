@@ -24,8 +24,8 @@
 
 	{% set marques = marques|merge([marque]) %}
 
-	<p class="ms-5 my-2">
+	<p class="ms-3 my-2">
 		<input type="checkbox" name="models[]" id="model-{{ annonce.models.id }}" value="{{ annonce.models.id }}" {{checked}}>
-		<label class="ms-2" for="model-{{ annonce.models.id }}">{{ annonce.models.name }}</label>
+		<label class="ms-1" for="model-{{ annonce.models.id }}">{{ annonce.models.name }}</label>
 	</p>
 {% endfor %}</form>

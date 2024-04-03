@@ -41,16 +41,16 @@
 				<button class="btn btn-primary w-50" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeftModels" aria-controls="offcanvasLeftModels">Trier par Modèle</button>
 
 				<div class="offcanvas offcanvas-start mt-5" tabindex="-1" id="offcanvasLeftModels" aria-labelledby="offcanvasLeftLabelModels">
-					<div class="offcanvas-header ms-3 mt-5">
+					<div class="offcanvas-header ms-4 mt-5">
 						<h5 id="offcanvasLeftLabelModels">Liste des modèles</h5>
 						<button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 					</div>
-					<div class="offcanvas-body ms-5">
+					<div class="offcanvas-body ms-4">
 						{% include "annonces/_modelsFilter.html.twig" %}
 					</div>
 				</div>
 
-				<button class="btn btn-primary w-50" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeftEnergies" aria-controls="offcanvasLeftEnergies">Trier par Carburant</button>
+				<button class="btn btn-primary w-50 " type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasLeftEnergies" aria-controls="offcanvasLeftEnergies">Trier par Carburant</button>
 
 				<div class="offcanvas offcanvas-start mt-5" tabindex="-1" id="offcanvasLeftEnergies" aria-labelledby="offcanvasLeftLabelEnergies">
 					<div class="offcanvas-header ms-5 mt-5">
@@ -72,19 +72,19 @@
                         </form>
 					</div>
 				</div>
-				<p class="mt-4 mb-5">Trier par Prix</p>
+				<p class="mt-4 mb-5 fw-bold">Trier par Prix</p>
 				<form class="js-filter-form w-50">
 					<input class="w-50" name="minPrice[]" type="hidden" id="minPrice" value="{{minPrice}}">
 					<input class="w-50" name="maxPrice[]" type="hidden" id="maxPrice" value="{{maxPrice}}">	
 					<div class="ms-2" id="price-slider" data-min="{{minPrice}}" data-max="{{maxPrice}}"></div>
 				</form>
-				<p class="mt-4 mb-5">Trier par Année</p>
+				<p class="mt-4 mb-5 fw-bold">Trier par Année</p>
 				<form class="js-filter-form w-50">
 					<input class="w-50" name="minYears[]" type="hidden" id="minYears" value="{{minYears}}">
 					<input class="w-50" name="maxYears[]" type="hidden" id="maxYears" value="{{maxYears}}">	
 					<div class="ms-2" id="years-slider" data-min="{{minYears}}" data-max="{{maxYears}}"></div>
 				</form>
-				<p class="mt-4 mb-5">Trier par Kilométrage</p>
+				<p class="mt-4 mb-5 fw-bold">Trier par Kilométrage</p>
 				<form class="js-filter-form w-50">
 					<input class="w-50" name="minMileage[]" type="hidden" id="minMileage" value="{{minMileage}}">
 					<input class="w-50" name="maxMileage[]" type="hidden" id="maxMileage" value="{{maxMileage}}">	
