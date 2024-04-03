@@ -24,6 +24,7 @@
 }
 
 footer {
+    border-top: 1px solid $primary;
     box-shadow: 0 50px black;
 }
 
@@ -72,16 +73,15 @@ footer, .container-infos-footer{
 
     /* Fin Style mentions et politique */
 
-    .mentions-row
+    footer {
+        border-top: none;
+    }
 
     .container-infos-footer {
         width: 95%;
     }
 
-    .logo-et-reseaux {
-        margin-right: 10%;
-    }
-
+    
     .logo-footer {
         width: 250px;
         margin: 0;
