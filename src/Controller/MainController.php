@@ -51,7 +51,10 @@ class MainController extends AbstractController
 
             $this->manager->persist($testimonialsInstance);
             $this->manager->flush();
+            $this->addFlash('success', 'Votre message a été envoyé avec succès !');
 
+        } else {
+            $this->addFlash('error', 'Désolé, votre message n\' pas pu être envoyé.');
         }
         return $this->render('main/index.html.twig', compact(
             "services",
