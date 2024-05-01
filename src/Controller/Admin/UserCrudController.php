@@ -11,7 +11,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\{ChoiceField, IdField, EmailField, Tex
 use Symfony\Component\Form\Extension\Core\Type\{PasswordType, RepeatedType};
 use Symfony\Component\Form\{FormBuilderInterface, FormEvent, FormEvents};
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use Symfony\Component\VarDumper\VarDumper;
 
 class UserCrudController extends AbstractCrudController
 {

@@ -23,6 +23,7 @@ import './styles/app.scss';
 import Filter from './js/Filter';
 import noUiSlider from 'nouislider'
 import 'nouislider/dist/nouislider.css';
+import wNumb from './js/wNumb';
 
 
 new Filter(document.querySelector('.js-filter'));
@@ -36,8 +37,8 @@ const mileageSlider = document.getElementById('mileage-slider');
 if (priceSlider) {
     const min = document.getElementById('minPrice')
     const max = document.getElementById('maxPrice')
-    const minValue = Math.floor(parseInt(priceSlider.dataset.min, 10) /1000) * 1000
-    const maxValue = Math.ceil(parseInt(priceSlider.dataset.max, 10) /1000) * 1000
+    const minValue = Math.round(parseInt(priceSlider.dataset.min, 10) /1000) * 1000
+    const maxValue = Math.round(parseInt(priceSlider.dataset.max, 10) /1000) * 1000
 
     const range = noUiSlider.create(priceSlider, {
         start: [min.value || minValue, max.value || maxValue],
@@ -48,7 +49,9 @@ if (priceSlider) {
         },
         step: 1000,
         tooltips: true,
-        
+        format: wNumb({decimals: 0,
+        thousand: '.',
+        suffix: ' €'})
     })
     range.on('end', function (values, handle) {
         if (handle === 0) {
@@ -78,6 +81,7 @@ if (yearsSlider) {
         },
         step: 1,
         tooltips: true,
+        format: wNumb({decimals: 0})
         
     })
     range.on('end', function (values, handle) {
@@ -107,6 +111,9 @@ if (mileageSlider) {
         },
         step: 1000,
         tooltips: true,
+        format: wNumb({decimals: 0,
+        thousand: '.',
+        suffix: ' km'})
         
     })
     range.on('end', function (values, handle) {

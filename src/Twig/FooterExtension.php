@@ -36,7 +36,7 @@ class FooterExtension extends AbstractExtension
     public function getDataSchedules(): string
     {
         return $this->cache->get('dataSchedules', function(ItemInterface $item) {
-            $item->expiresAfter(5);
+            $item->expiresAfter(3600);
             return $this->renderDataSchedules();
         });
     }

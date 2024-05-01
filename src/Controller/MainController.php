@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Picture;
 use App\Entity\Testimonial;
 use App\Form\Type\TestimonialType;
 use App\Repository\PictureRepository;

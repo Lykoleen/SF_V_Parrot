@@ -19,7 +19,6 @@
 	<div id="section-services" class="section-services py-5">
 		<h2>NOS SERVICES</h2>
 		<div class="col-10 row row-cols-1 row-cols-lg-2 row-cols-xl-3 mx-auto g-5">
-			{% set countService = 0 %}
 			{% for service in services %}
 				<div class="col">
 					<div class="card card-service">
@@ -29,8 +28,7 @@
 							<p class="card-text">{{ service.description|raw }}</p>
 						</div>
 					</div>
-				</div>
-				{% set countService = countService + 1 %}
+				</div>		
 			{% endfor %}
 		</div>
 	</div>

@@ -48,37 +48,38 @@
 			</div>
 			<div class="infos-garage col my-4 mb-5 text-center text-xl-start ps-xl-5">
 				<h3 class="mb-3">Informations</h3>
-					<ul class="list-infos-garage nav flex-column">
-						<li class="li-nom-garage mb-2">
-							{{ garage.name }}
-						</li>
-						<li class="li-num mb-2">
-							Tel: 0{{ garage.tel }}
-						</li>
-						<li class="li-email mb-2">
-							Email: {{ garage.email }}
-						</li>
-						<li class="li-adresse mb-2">
-							{{ garage.adress }}
-						</li>
-					</ul>
+				<ul class="list-infos-garage nav flex-column">
+					<li class="li-nom-garage mb-2">
+						{{ garage.name }}
+					</li>
+					<li class="li-num mb-2">
+						Tel: 0{{ garage.tel }}
+					</li>
+					<li class="li-email mb-2">
+						Email:
+						{{ garage.email }}
+					</li>
+					<li class="li-adresse mb-2">
+						{{ garage.adress }}
+					</li>
+				</ul>
 			</div>
 			<div class="acces-rapide col mt-4 mb-5 text-center text-xl-start ps-xl-5">
 				<h3 class="mb-3">Accès rapide</h3>
 				<ul class="nav flex-column">
 					<li class="nav-item mb-2">
-						<a href="/" class="nav-link p-0 text-white">Accueil</a>
+						<a title="Lien redirigant vers la page d'accueil du site" href="/" class="nav-link p-0 text-white">Accueil</a>
 					</li>
-					<li class="nav-item mb-2">
+					<li title="Lien redirigant vers la section des services proposés par le garage sur la page d'accueil du site." class="nav-item mb-2">
 						<a href="{{ path('accueil') }}#section-services" class="nav-link p-0 text-white">Nos Services</a>
 					</li>
-					<li class="nav-item mb-2">
+					<li title="Lien redirigant vers la page des véhicules d'occasions" class="nav-item mb-2">
 						<a href="/annonces" class="nav-link p-0 text-white">Les occasions</a>
 					</li>
-					<li class="nav-item mb-2">
+					<li title="Lien redirigant vers la section pour déposer un avis client." class="nav-item mb-2">
 						<a href="{{ path('accueil') }}#testimonials" class="nav-link p-0 text-white">Déposer un avis</a>
 					</li>
-					<li class="nav-item mb-2">
+					<li title="Lien redirigant vers la page de contact" class="nav-item mb-2">
 						<a href="/contact" class="nav-link p-0 text-white">Contact</a>
 					</li>
 				</ul>
@@ -89,8 +90,8 @@
 	<div class="container-mentions my-4">
 		<div class="link-mentions d-xl-flex flex-xl-row-reverse justify-content-between my-5">
 			<div class="politique-mentions d-flex flex-column flex-xl-row-reverse justify-content-xl-end gap-xl-5">
-				<a href=" {{ path('mentions') }}" class="text-white">Mentions légales</a>
-				<a href=" {{ path('politique') }}" class="text-white">Politique de confidentialité</a>
+				<a title="Lien redirigeant vers la page des mentions légales du site" href=" {{ path('mentions') }}" class="text-white">Mentions légales</a>
+				<a title="Lien redirigeant vers la page de la politique de confidentialité." href=" {{ path('politique') }}" class="text-white">Politique de confidentialité</a>
 			</div>
 			<div class="droits">
 				<p class="text-white">©2024 Garage V.Parrot. Tous droits réservés.</p>

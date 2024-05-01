@@ -10,13 +10,13 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav w-100 me-5 justify-content-end">
-						<a class="nav-link" aria-current="page" href="/">Accueil</a>
-						<a class="nav-link" href="{{ path('accueil') }}#section-services">Nos services</a>
-						<a class="nav-link" href="/annonces">Les occasions</a>
-						<a class="nav-link" href="{{ path('accueil') }}#testimonials">Déposer un avis</a>
-						<a class="nav-link" href="/contact">Contact</a>
+						<a title="Lien redirigant vers la page d'accueil du site" class="nav-link" aria-current="page" href="/">Accueil</a>
+						<a title="Lien redirigant vers la section des services proposés par le garage sur la page d'accueil du site." class="nav-link" href="{{ path('accueil') }}#section-services">Nos services</a>
+						<a title="Lien redirigant vers la page des véhicules d'occasions" class="nav-link" href="/annonces">Les occasions</a>
+						<a title="Lien redirigant vers la section pour déposer un avis client." class="nav-link" href="{{ path('accueil') }}#testimonials">Déposer un avis</a>
+						<a title="Lien redirigant vers la page de contact" class="nav-link" href="/contact">Contact</a>
 						<div class="col-xl-1 text-end pt-1 ms-3">
-							<a href="/login"><img src=" {{ asset('build/images/iconeconnexion.png') }} " alt="lien vers la page de connexion" height="25"></a>
+							<a title="Lien redirigant vers la page de connexion pour les employés." href="/login"><img src=" {{ asset('build/images/iconeconnexion.png') }} " alt="lien vers la page de connexion" height="25"></a>
 						</div>
 					</div>
 				</div>
