@@ -49,9 +49,7 @@ if (priceSlider) {
         },
         step: 1000,
         tooltips: true,
-        format: wNumb({decimals: 0,
-        thousand: '.',
-        suffix: ' €'})
+        format: wNumb({decimals: 0})
     })
     range.on('end', function (values, handle) {
         if (handle === 0) {
@@ -111,9 +109,7 @@ if (mileageSlider) {
         },
         step: 1000,
         tooltips: true,
-        format: wNumb({decimals: 0,
-        thousand: '.',
-        suffix: ' km'})
+        format: wNumb({decimals: 0})
         
     })
     range.on('end', function (values, handle) {
