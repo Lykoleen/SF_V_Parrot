@@ -25,19 +25,22 @@ class ContactController extends AbstractController
 
             $formData = $form->getData();
             $email = (new Email())
-            ->from($formData['email'])
-            ->to('tony.rabillard16@gmail.com')
+            ->from('tony.rabillard@projet.ecfparrotvincent.fr')
+            ->to('tony.rabillard@projet.ecfparrotvincent.fr')
             ->subject($formData['subject'])
             ->text('De : ' . $formData['name'] . ' ' . $formData['surname'] . ' (' . $formData['email'] . ')' . "\n\n" . $formData['message']);
-
+     
             try {
                 $mailer->send($email);
                 $this->addFlash('success', 'Votre message a été envoyé avec succès !');
             } catch (TransportExceptionInterface $e) {
-                $e = "L'envoi du mail n'a pas fonctionné.";
-                return $e;
+                $errorMessage = "L'envoi du mail n'a pas fonctionné.";
+                $this->addFlash('error', $errorMessage);
+                return $this->redirectToRoute('contact');
             }
         }
+
+        $form = $this->createForm(ContactType::class);
 
         return $this->render('contact/index.html.twig', [
             'form' => $form->createView(),
