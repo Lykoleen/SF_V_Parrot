@@ -12,7 +12,10 @@ services:
      
   
   v_parrot: 
-    image: db4e36dde5f7dbefd92be040f7836c2c72d985195e0cef1d9a56b80b088b2b2a
+    # image: db4e36dde5f7dbefd92be040f7836c2c72d985195e0cef1d9a56b80b088b2b2a
+    build:
+      context: ../.
+      dockerfile: ./docker/Dockerfile
     ports:
       - "8080:80"
     env_file:

@@ -17,12 +17,13 @@ RUN apt update && apt install -yqq nodejs npm unzip
 # Copier les fichiers de l'application
 COPY . /var/www/
 
+
 # Copier la configuration Apache personnalisée
 COPY ./docker/apache.conf /etc/apache2/sites-available/000-default.conf
 
 # Copier le fichier .env
-COPY .env /var/www/.env
-COPY .env.local /var/www/.env.local
+COPY ../.env /var/www/.env
+COPY ../.env.local /var/www/.env.local
 
 # Changer le propriétaire des fichiers pour éviter les problèmes de permission
 RUN chown -R www-data:www-data /var/www
