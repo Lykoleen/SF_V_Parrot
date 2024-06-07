@@ -1,0 +1,36 @@
+version: '3.8'
+
+services: 
+  db:
+    image: mysql:8.0
+    container_name: v_parrot-db
+    environment:
+      MYSQL_ROOT_PASSWORD: Increcregym777@
+      MYSQL_DATABASE: v_parrot
+    volumes:
+      - "./db:/docker-entrypoint-initdb.d" # Synchronisation persistante du fichier sql avec le container.
+    restart: always
+     
+  
+  v_parrot: 
+    # image: db4e36dde5f7dbefd92be040f7836c2c72d985195e0cef1d9a56b80b088b2b2a
+    build:
+      context: ../.
+      dockerfile: ./docker/Dockerfile
+    ports:
+      - "8080:80"
+    env_file:
+      - ../.env.local
+    restart: always
+
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8081:80
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+    restart: always
+
+  
