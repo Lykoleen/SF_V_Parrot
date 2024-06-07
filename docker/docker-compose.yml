@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services: 
   db:
@@ -9,6 +9,7 @@ services:
       MYSQL_DATABASE: v_parrot
     volumes:
       - "./db:/docker-entrypoint-initdb.d" # Synchronisation persistante du fichier sql avec le container.
+    restart: always
      
   
   v_parrot: 
@@ -20,6 +21,8 @@ services:
       - "8080:80"
     env_file:
       - ../.env.local
+    restart: always
+
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
@@ -28,4 +31,6 @@ services:
     environment:
       - PMA_HOST=db
       - PMA_PORT=3306
+    restart: always
+
   

@@ -2,7 +2,8 @@
 FROM php:8.1-apache
 
 # Ajouter le script d'installation des extensions PHP
-ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
+RUN curl -fsSL https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions -o /usr/local/bin/install-php-extensions && \
+    chmod +x /usr/local/bin/install-php-extensions
 
 # Installer les extensions PHP nécessaires
 RUN install-php-extensions pdo_mysql intl zip
@@ -12,11 +13,10 @@ RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
     mv composer.phar /usr/local/bin/composer
 
 # Installer Node.js et npm
-RUN apt update && apt install -yqq nodejs npm unzip
+RUN apt-get update && apt-get install -yqq nodejs npm unzip && apt-get clean
 
 # Copier les fichiers de l'application
 COPY . /var/www/
-
 
 # Copier la configuration Apache personnalisée
 COPY ./docker/apache.conf /etc/apache2/sites-available/000-default.conf
@@ -28,10 +28,8 @@ COPY ../.env.local /var/www/.env.local
 # Changer le propriétaire des fichiers pour éviter les problèmes de permission
 RUN chown -R www-data:www-data /var/www
 
-# Passer à l'utilisateur www-data pour éviter d'exécuter les commandes en tant que root
-USER www-data
-
 # Installer les dépendances PHP et JavaScript
+USER www-data
 RUN cd /var/www && \
     composer install --no-interaction --no-progress && \
     npm install --force && \
